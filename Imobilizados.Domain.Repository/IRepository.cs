@@ -2,7 +2,7 @@
 
 namespace Imobilizados.Repository
 {
-    public interface IRepository<TEntity>
+    public interface IRepository<TEntity> where TEntity : class
     {
     }
 }
