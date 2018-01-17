@@ -1,12 +1,19 @@
 ﻿using System;
 
-namespace Imobilizados.Entity
+namespace Imobilizados.Domain.Entity
 {
-    public class Hardware
+    public class Hardware : IEntity
     {
-        public virtual string Name { get; set; }
-        public virtual string Brand { get; set; }
-        public virtual string FacoryCode { get; set; }
-        public virtual string Description { get; set; }
+        #region 'Properties'
+
+        public dynamic Id { get; set; }
+        public string Name { get; set; }
+        public string Brand { get; set; }
+        public string FacoryCode { get; set; }
+        public string Description { get; set; }
+        public bool IsImmobilized => ImmobilizerFloor != null && ImmobilizerFloor.Level > -1;
+        public Floor ImmobilizerFloor { get; set; }
+
+        #endregion
     }
 }

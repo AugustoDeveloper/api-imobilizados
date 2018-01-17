@@ -7,11 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Test", "Imobil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.WebApi", "Imobilizados.WebApi\Imobilizados.WebApi.csproj", "{93A575D1-D227-4B81-BB4C-53A884CF5706}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Repository.MongoDb", "Imobilizados.Repository.MongoDb\Imobilizados.Repository.MongoDb.csproj", "{745BFC46-8A87-4AC5-9556-5439DB96A309}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Repository.MongoDb", "Imobilizados.Infrastructure.MongoDb\Imobilizados.Infrastructure.MongoDb.csproj", "{745BFC46-8A87-4AC5-9556-5439DB96A309}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Domain.Repository", "Imobilizados.Domain.Repository\Imobilizados.Domain.Repository.csproj", "{1C49D19F-23F1-472B-8D64-14D5DAF8854A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Domain.Entity", "Imobilizados.Domain.Entity\Imobilizados.Domain.Entity.csproj", "{76D1AD69-6585-4912-B571-6646C86DB423}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Application", "Imobilizados.Application\Imobilizados.Application.csproj", "{01297827-89D2-4058-BE66-6D2F053BD350}"
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
@@ -86,5 +88,17 @@ Global
 		{76D1AD69-6585-4912-B571-6646C86DB423}.Release|x64.Build.0 = Release|x64
 		{76D1AD69-6585-4912-B571-6646C86DB423}.Release|x86.ActiveCfg = Release|x86
 		{76D1AD69-6585-4912-B571-6646C86DB423}.Release|x86.Build.0 = Release|x86
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Debug|x64.ActiveCfg = Debug|x64
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Debug|x64.Build.0 = Debug|x64
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Debug|x86.ActiveCfg = Debug|x86
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Debug|x86.Build.0 = Debug|x86
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Release|x64.ActiveCfg = Release|x64
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Release|x64.Build.0 = Release|x64
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Release|x86.ActiveCfg = Release|x86
+		{01297827-89D2-4058-BE66-6D2F053BD350}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 EndGlobal
