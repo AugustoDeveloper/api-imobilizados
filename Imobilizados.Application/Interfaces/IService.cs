@@ -12,11 +12,10 @@ namespace Imobilizados.Application.Interfaces
                                              where TEntity : class, IEntity
                                              where TRepository : IRepository<TEntity>
     {
-        Task<TEntity> AddAsync(TEntity entity);
-        Task<bool> UpdateAsync(TEntity entity);
-        Task<bool> DeleteAsync(Expression<TEntity> criteria);
-        Task<List<TEntity>> LoadAllAsync();
-        Task<List<TEntity>> LoadByAsync(Expression<TEntity> criteria);
-        Task<TEntity> GetByIdAsync(dynamic id);
+        Task AddAsync(TDto dto);
+        Task<TDto> UpdateAsync(dynamic id, TDto dto);
+        Task<bool> DeleteAsync(dynamic id);
+        Task<List<TDto>> LoadAllAsync();
+        Task<TDto> GetByIdAsync(dynamic id);
     }
 }

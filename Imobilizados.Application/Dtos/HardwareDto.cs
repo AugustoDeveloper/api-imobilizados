@@ -6,7 +6,7 @@ namespace Imobilizados.Application.Dtos
     {
         #region 'Properties'
 
-        public dynamic Id { get; set; }
+        public object Id { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
         public string FacoryCode { get; set; }

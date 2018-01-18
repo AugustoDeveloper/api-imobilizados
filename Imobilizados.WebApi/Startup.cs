@@ -19,7 +19,7 @@ namespace Imobilizados.WebApi
 {
     public class Startup
     {
-        private Container container = new Container();
+        private Container _container = new Container();
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
@@ -46,10 +46,10 @@ namespace Imobilizados.WebApi
 
         private void IntegrateSimpleInjector(IServiceCollection services)
         {
-            container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
-            services.EnableSimpleInjectorCrossWiring(container);
-            services.UseSimpleInjectorAspNetRequestScoping(container);
-            container.RegisterMongoDbRepository(Configuration);
+            _container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+            services.EnableSimpleInjectorCrossWiring(_container);
+            services.UseSimpleInjectorAspNetRequestScoping(_container);
+            _container.RegisterMongoDbRepositoriesAndMap(Configuration);
         }
     }
 }

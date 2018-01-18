@@ -6,9 +6,9 @@ namespace Imobilizados.Application.Dtos
     {
         #region 'Properties'
 
-        public dynamic Id { get; set; }
+        public object Id { get; set; }
         public int Level { get; set; }
-        public string Departament { get; set; }
+        public string LevelName { get; set; }
 
         #endregion
     }

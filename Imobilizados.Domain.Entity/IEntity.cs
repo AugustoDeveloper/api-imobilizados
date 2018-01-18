@@ -2,5 +2,8 @@ using System;
 
 namespace Imobilizados.Domain.Entity
 {
-    public interface IEntity { }
+    public interface IEntity
+    {
+        object Id { get; set; }
+    }
 }

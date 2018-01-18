@@ -10,11 +10,15 @@
     <PackageReference Include="SimpleInjector" Version="4.0.12" />
     <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc" Version="4.0.12" />
     <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Imobilizados.Domain.Repository\Imobilizados.Domain.Repository.csproj" />
+    <ProjectReference Include="..\Imobilizados.Domain.Entity\Imobilizados.Domain.Entity.csproj" />
+    <ProjectReference Include="..\Imobilizados.Infrastructure.MongoDb\Imobilizados.Infrastructure.MongoDb.csproj" />
+    <ProjectReference Include="..\Imobilizados.Application\Imobilizados.Application.csproj" />
   </ItemGroup>
 </Project>

@@ -10,19 +10,16 @@ namespace Imobilizados.Domain.Repository.Base
     {
         #region 'Methods'
 
-        TEntity Add(TEntity entity);
-        Task<TEntity> AddAsync(TEntity entity);
-        bool Update(TEntity entity);
-        Task<bool> UpdateAsync(TEntity entity);
-        bool Delete(Expression<TEntity> criteria);
-        Task<bool> DeleteAsync(Expression<TEntity> criteria);
+        void Add(TEntity entity);
+        Task AddAsync(TEntity entity);
+        TEntity Update(object id, TEntity entity);
+        Task<TEntity> UpdateAsync(object id, TEntity entity);
+        bool Delete(object id);
+        Task<bool> DeleteAsync(object id);
         List<TEntity> LoadAll();
         Task<List<TEntity>> LoadAllAsync();
-        
-        List<TEntity> LoadBy(Expression<TEntity> criteria);
-        Task<List<TEntity>> LoadByAsync(Expression<TEntity> criteria);
-        TEntity GetById(dynamic id);
-        Task<TEntity> GetByIdAsync(dynamic id);
+        TEntity GetById(object id);
+        Task<TEntity> GetByIdAsync(object id);
 
         #endregion
     }

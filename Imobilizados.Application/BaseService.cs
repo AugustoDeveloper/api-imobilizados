@@ -23,21 +23,50 @@ namespace Imobilizados.Application
             Repository = repository;
         }
 
-        public abstract Task<TEntity> AddAsync(TEntity entity);
-        public abstract Task<bool> UpdateAsync(TEntity entity);
-        public abstract Task<bool> DeleteAsync(Expression<TEntity> criteria);
-        public abstract Task<List<TEntity>> LoadAllAsync();
-        public abstract Task<List<TEntity>> LoadByAsync(Expression<TEntity> criteria);
-        public abstract Task<TEntity> GetByIdAsync(dynamic id);
+        public async Task AddAsync(TDto dto)
+        {
+            var entity = TransformToEntity(dto);
+            await Repository.AddAsync(entity);
+        }
+        
+        public async Task<TDto> UpdateAsync(dynamic id, TDto dto)
+        {
+            var entity = TransformToEntity(dto);
+            var updatedEntity = await Repository.UpdateAsync(id, entity);
+            return TransformToDto(updatedEntity);
+        }
 
-        protected TEntity Transform(TDto dto)
+        public async Task<bool> DeleteAsync(dynamic id)
+        {
+            var entity = TransformToEntity(id);
+            return await Repository.DeleteAsync(id);
+        }
+
+        public async Task<List<TDto>> LoadAllAsync()
+        {
+            var collection = await Repository.LoadAllAsync();
+            return TransformToDto(collection);
+        }
+
+        public async Task<TDto> GetByIdAsync(dynamic id)
+        {
+            var entity = await Repository.GetById(id);
+            return entity;
+        }
+
+        protected TEntity TransformToEntity(TDto dto)
         {
             return Mapper.Map<TEntity>(dto);
         }
 
-        protected TDto Transform(TEntity entity)
+        protected TDto TransformToDto(TEntity entity)
         {
             return Mapper.Map<TDto>(entity);
+        }
+
+        protected List<TDto> TransformToDto(List<TEntity> collection)
+        {
+            return Mapper.Map<List<TDto>>(collection);
         }
     }
 }
