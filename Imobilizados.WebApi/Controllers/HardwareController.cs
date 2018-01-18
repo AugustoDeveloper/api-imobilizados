@@ -2,18 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Imobilizados.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Imobilizados.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class HardwareController : Controller
     {
-        // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private IHardwareService _service;
+
+        public HardwareController(IHardwareService service)
         {
-            return new string[] { "value1", "value2" };
+            _service = service;
+        }
+
+        // GET api/values
+        [HttpGet("/all")]
+        public async Task<IActionResult> LoadAllAsync()
+        {
+            var collection = await _service.LoadAllAsync();
+            return Ok(collection);
         }
 
         // GET api/values/5
