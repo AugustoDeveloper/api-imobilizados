@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Imobilizados.Application.Dtos;
 using Imobilizados.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Imobilizados.WebApi.Controllers
 {
     [Route("api/[controller]")]
+    [ValidateModel]
     public class HardwareController : Controller
     {
         private IHardwareService _service;
@@ -25,17 +28,30 @@ namespace Imobilizados.WebApi.Controllers
             return Ok(collection);
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetById([Required] string id)
         {
-            return "value";
+            if (string.IsNullOrEmpty(id) || string.IsNullOrWhiteSpace(id)) return BadRequest(ModelState);
+
+            var hardware = await _service.GetByIdAsync(id);
+            if (hardware != null)
+            {
+                return Ok(hardware);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> Create([FromBody]HardwareDto dto)
         {
+            if (dto == null || !ModelState.IsValid)  return BadRequest(ModelState);
+
+            await _service.AddAsync(dto);
+
+            return NoContent();
         }
 
         // PUT api/values/5

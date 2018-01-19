@@ -33,11 +33,10 @@ namespace Imobilizados.Infrastructure.MongoDb
                         .SetIsRequired(true)
                         .SetDefaultValue(false);
                     mapper.MapMember(f => f.ImmobilizerFloor)
-                        .SetElementName("Immobilizer_floor")
+                        .SetElementName("immobilizer_floor")
                         .SetIgnoreIfNull(true)
                         .SetIsRequired(false);                                    
                 });
-                        
             }
 
             if (BsonClassMap.IsClassMapRegistered(typeof(Floor)))

@@ -31,7 +31,7 @@ namespace Imobilizados.Infrastructure.MongoDb.Base
              await Collection.InsertOneAsync(entity);
         }
 
-        public override bool Delete(object id)
+        public override bool Delete(string id)
         {
             var filter = Builders<TEntity>.Filter;
             string objectId = Convert.ToString(id);
@@ -40,27 +40,27 @@ namespace Imobilizados.Infrastructure.MongoDb.Base
             return result.IsAcknowledged;
         }
 
-        public override async Task<bool> DeleteAsync(object id)
+        public override async Task<bool> DeleteAsync(string id)
         {
 
             var filter = Builders<TEntity>.Filter;
-            var criteria = filter.Eq(e => e.Id, (ObjectId)id);
+            var criteria = filter.Eq(e => e.Id, id);
             var result = await Collection.DeleteOneAsync(criteria);
             return result.IsAcknowledged;
         }
 
-        public override TEntity GetById(object id)
+        public override TEntity GetById(string id)
         {
             var filter = Builders<TEntity>.Filter;
-            var criteria = filter.Eq(e => e.Id, (ObjectId)id);
+            var criteria = filter.Eq(e => e.Id, id);
             var entity = Collection.Find(criteria).SingleOrDefault();
             return entity;
         }
 
-        public override async Task<TEntity> GetByIdAsync(object id)
+        public override async Task<TEntity> GetByIdAsync(string id)
         {
             var filter = Builders<TEntity>.Filter;
-            var criteria = filter.Eq(e => e.Id, (ObjectId)id);
+            var criteria = filter.Eq(e => e.Id, id);
             var entity = await Collection.Find(criteria).SingleOrDefaultAsync();
             return entity;
         }
@@ -81,18 +81,18 @@ namespace Imobilizados.Infrastructure.MongoDb.Base
             return batch;
         }
 
-        public override TEntity Update(object id, TEntity entity)
+        public override TEntity Update(string id, TEntity entity)
         {
             var filter = Builders<TEntity>.Filter;
-            var criteria = filter.Eq(e => e.Id, (ObjectId)id);
+            var criteria = filter.Eq(e => e.Id, id);
             var batch = Collection.FindOneAndReplace(criteria, entity);
             return batch;
         }
 
-        public override async Task<TEntity> UpdateAsync(object id, TEntity entity)
+        public override async Task<TEntity> UpdateAsync(string id, TEntity entity)
         {
             var filter = Builders<TEntity>.Filter;
-            var criteria = filter.Eq(e => e.Id, (ObjectId)id);
+            var criteria = filter.Eq(e => e.Id, id);
             var batch = await Collection.FindOneAndReplaceAsync(criteria, entity);
             
             return batch;

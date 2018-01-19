@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Imobilizados.Application.Dtos
 {
@@ -6,8 +7,15 @@ namespace Imobilizados.Application.Dtos
     {
         #region 'Properties'
 
-        public object Id { get; set; }
+        [Display(Name = "id")]
+        [Required]
+        public string Id { get; set; }
+        
+        [Required]
+        [Display(Name = "level")]
         public int Level { get; set; }
+
+        [Display(Name = "level_name")]
         public string LevelName { get; set; }
 
         #endregion

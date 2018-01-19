@@ -12,14 +12,14 @@ namespace Imobilizados.Domain.Repository.Base
 
         void Add(TEntity entity);
         Task AddAsync(TEntity entity);
-        TEntity Update(object id, TEntity entity);
-        Task<TEntity> UpdateAsync(object id, TEntity entity);
-        bool Delete(object id);
-        Task<bool> DeleteAsync(object id);
+        TEntity Update(string id, TEntity entity);
+        Task<TEntity> UpdateAsync(string id, TEntity entity);
+        bool Delete(string id);
+        Task<bool> DeleteAsync(string id);
         List<TEntity> LoadAll();
         Task<List<TEntity>> LoadAllAsync();
-        TEntity GetById(object id);
-        Task<TEntity> GetByIdAsync(object id);
+        TEntity GetById(string id);
+        Task<TEntity> GetByIdAsync(string id);
 
         #endregion
     }

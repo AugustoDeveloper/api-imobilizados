@@ -29,16 +29,15 @@ namespace Imobilizados.Application
             await Repository.AddAsync(entity);
         }
         
-        public async Task<TDto> UpdateAsync(dynamic id, TDto dto)
+        public async Task<TDto> UpdateAsync(string id, TDto dto)
         {
             var entity = TransformToEntity(dto);
             var updatedEntity = await Repository.UpdateAsync(id, entity);
             return TransformToDto(updatedEntity);
         }
 
-        public async Task<bool> DeleteAsync(dynamic id)
+        public async Task<bool> DeleteAsync(string id)
         {
-            var entity = TransformToEntity(id);
             return await Repository.DeleteAsync(id);
         }
 
@@ -48,10 +47,11 @@ namespace Imobilizados.Application
             return TransformToDto(collection);
         }
 
-        public async Task<TDto> GetByIdAsync(dynamic id)
+        public async Task<TDto> GetByIdAsync(string id)
         {
-            var entity = await Repository.GetById(id);
-            return entity;
+            var entity = await Repository.GetByIdAsync(id);
+            var dto = TransformToDto(entity);
+            return dto;
         }
 
         protected TEntity TransformToEntity(TDto dto)
