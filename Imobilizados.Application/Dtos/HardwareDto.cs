@@ -25,7 +25,7 @@ namespace Imobilizados.Application.Dtos
         public string Description { get; set; }
 
         [Display(Name = "is_immobilized")]
-        public bool IsImmobilized { get; set; }
+        public bool IsImmobilized => ImmobilizerFloor?.Level > -1;
 
         [Display(Name = "immobilizer_floor")]
         public FloorDto ImmobilizerFloor { get; set; }

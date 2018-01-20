@@ -11,7 +11,7 @@ namespace Imobilizados.Domain.Entity
         public string Brand { get; set; }
         public string FacoryCode { get; set; }
         public string Description { get; set; }
-        public bool IsImmobilized => ImmobilizerFloor != null && ImmobilizerFloor.Level > -1;
+        public bool IsImmobilized { get; set; }
         public Floor ImmobilizerFloor { get; set; }
 
         #endregion

@@ -63,6 +63,18 @@ namespace Imobilizados.Application
             return Mapper.Map<TDto>(entity);
         }
 
+        protected TNewEntity TransformToEntity<TNewEntity, TNewDto>(TNewDto dto) where TNewEntity : class, IEntity
+                                                                              where TNewDto : class, IDto
+        {
+            return Mapper.Map<TNewEntity>(dto);
+        }
+
+        protected TNewDto TransformToDto<TNewEntity, TNewDto>(TNewEntity entity) where TNewEntity : class, IEntity
+                                                                              where TNewDto : class, IDto
+        {
+            return Mapper.Map<TNewDto>(entity);
+        }
+
         protected List<TDto> TransformToDto(List<TEntity> collection)
         {
             return Mapper.Map<List<TDto>>(collection);

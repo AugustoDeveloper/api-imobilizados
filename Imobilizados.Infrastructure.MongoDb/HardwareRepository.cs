@@ -14,6 +14,11 @@ namespace Imobilizados.Infrastructure.MongoDb
     {
         protected HardwareRepository(IMongoClient mongoClient) : base(mongoClient){ }
 
-        protected override string CollectionName => "Floor";
+        protected override string CollectionName => "Hardwares";
+
+        public override async Task<List<Hardware>> LoadByIsImmobilized(bool isImmobilized)
+        {
+            return await Collection.Find( h => h.IsImmobilized).ToListAsync();
+        }
     }
 }

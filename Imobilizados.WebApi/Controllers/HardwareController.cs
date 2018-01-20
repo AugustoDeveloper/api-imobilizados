@@ -79,7 +79,6 @@ namespace Imobilizados.WebApi.Controllers
             return NoContent();
         }
 
-        // DELETE api/values/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -97,6 +96,47 @@ namespace Imobilizados.WebApi.Controllers
 
             await _service.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpGet("/all")]
+        public async Task<List<HardwareDto>> LoadByIsImmobilized([FromQuery(Name = "is_immobilized")] bool isImmobilized)
+        {
+            return await _service.LoadByIsImmobilizedAsync(isImmobilized);
+        }
+
+        [HttpGet("/all")]
+        public async Task<List<HardwareDto>> LoadByFloor([FromQuery(Name = "floor")] int floorLevel)
+        {
+            return await _service.LoadByFloorAsync(new FloorDto { Level = floorLevel });
+        }
+
+        [HttpPut("{id}/immobilize")]
+        public async Task<IActionResult> Immobilize(string id, FloorDto floor)
+        {
+            if (string.IsNullOrEmpty(id) || 
+                string.IsNullOrWhiteSpace(id) ||
+                (floor == null) ||
+                (floor?.Level <  0)
+                ) 
+            {
+                return BadRequest();
+            }
+
+            var existsDto = await _service.GetByIdAsync(id);
+            if (existsDto == null) 
+            {
+                return NotFound();
+            }
+
+            if (existsDto.IsImmobilized)
+            {
+                return BadRequest();
+            }
+
+            existsDto.ImmobilizerFloor = floor;
+
+            await _service.UpdateAsync(id, existsDto);
+            return NoContent();            
         }
     }
 }

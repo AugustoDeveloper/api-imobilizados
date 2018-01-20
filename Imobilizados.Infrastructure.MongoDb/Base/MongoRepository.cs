@@ -81,6 +81,6 @@ namespace Imobilizados.Infrastructure.MongoDb.Base
         public override async Task UpdateAsync(string id, TEntity entity)
         {
             await Collection.ReplaceOneAsync(e => e.Id == id, entity);
-        }
+        }        
     }
 }

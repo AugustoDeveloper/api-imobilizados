@@ -6,14 +6,10 @@ namespace Imobilizados.Application.Dtos
     public class FloorDto : IDto
     {
         #region 'Properties'
-
-        [Display(Name = "id")]
-        [Key]
-        public string Id { get; set; }
         
         [Required]
         [Display(Name = "level")]
-        public int Level { get; set; }
+        public int Level { get; set; } = -1;
 
         [Display(Name = "level_name")]
         public string LevelName { get; set; }

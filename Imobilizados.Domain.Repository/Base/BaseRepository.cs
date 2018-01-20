@@ -20,6 +20,7 @@ namespace Imobilizados.Domain.Repository.Base
         public abstract Task<List<TEntity>> LoadAllAsync();
         public abstract void Update(string id, TEntity entity);
         public abstract Task UpdateAsync(string id, TEntity entity);
+        public abstract Task<List<TEntity>> LoadByIsImmobilized(bool isImmobilized);
         
     }
 }

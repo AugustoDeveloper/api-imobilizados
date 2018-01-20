@@ -24,7 +24,367 @@ namespace Imobilizados.Test
                 HttpContext = new DefaultHttpContext()
             };
         }
+#region "Immobilize"
 
+        [Theory]
+        [InlineData("1223123")]
+        [InlineData(1)]
+        public async void Immobilize_ShouldReturnsNotFound_WhenPassFloorDtoWithValidLevel_And_ServiceFoundHardware_And_HardwareNotImmobilized(string id, int level)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup(s => s.GetByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(new HardwareDto { Id = id, Name = "Computador" });
+            mockService.Setup( s => s.UpdateAsync(It.IsAny<string>(), It.IsAny<HardwareDto>()))
+                .Returns(Task.FromResult(0));
+
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            
+            var response = await controller.Immobilize(id, new FloorDto {Level = level, LevelName = "Finance" });
+
+            Assert.NotNull(response);
+            var expectedType = typeof(NoContentResult);
+            Assert.IsType(expectedType, response);
+        }
+
+        [Theory]
+        [InlineData("1223123")]
+        [InlineData(1)]
+        public async void Immobilize_ShouldReturnsNotFound_WhenPassFloorDtoWithValidLevel_And_ServiceFoundHardware_And_HardwareAlreadyImmbilized(string id, int level)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup(s => s.GetByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(new HardwareDto { Id = id, Name = "Computador", ImmobilizerFloor = new FloorDto{ Level = 10 }});
+            mockService.Setup( s => s.UpdateAsync(It.IsAny<string>(), It.IsAny<HardwareDto>()))
+                .Returns(Task.FromResult(0));
+
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            
+            var response = await controller.Immobilize(id, new FloorDto {Level = level, LevelName = "Finance" });
+
+            Assert.NotNull(response);
+            var expectedType = typeof(BadRequestResult);
+            Assert.IsType(expectedType, response);
+        }
+
+        [Theory]
+        [InlineData("1223123")]
+        [InlineData(1)]
+        public async void Immobilize_ShouldReturnsNotFound_WhenPassFloorDtoWithValidLevel_And_ServiceNotFoundHardware(string id, int level)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup(s => s.GetByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync((HardwareDto)null);
+            mockService.Setup( s => s.UpdateAsync(It.IsAny<string>(), It.IsAny<HardwareDto>()))
+                .Returns(Task.FromResult(0));
+
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            
+            var response = await controller.Immobilize(id, new FloorDto {Level = level, LevelName = "Finance" });
+
+            Assert.NotNull(response);
+            var expectedType = typeof(NotFoundResult);
+            Assert.IsType(expectedType, response);
+        }
+
+        [Theory]
+        [InlineData("1223123")]
+        [InlineData(-1)]
+        public async void Immobilize_ShouldReturnsBadRequest_WhenPassFloorDtoWithInvalidLevel(string id, int level)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup(s => s.GetByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(new HardwareDto());
+            mockService.Setup( s => s.UpdateAsync(It.IsAny<string>(), It.IsAny<HardwareDto>()))
+                .Returns(Task.FromResult(0));
+
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            
+            var response = await controller.Immobilize(id, new FloorDto {Level = level});
+
+            Assert.NotNull(response);
+            var expectedType = typeof(BadRequestResult);
+            Assert.IsType(expectedType, response);
+        }
+
+        [Theory]
+        [InlineData("1223123")]
+        public async void Immobilize_ShouldReturnsBadRequest_WhenPassEmptyFloorDto(string id)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup(s => s.GetByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(new HardwareDto());
+            mockService.Setup( s => s.UpdateAsync(It.IsAny<string>(), It.IsAny<HardwareDto>()))
+                .Returns(Task.FromResult(0));
+
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            
+            var response = await controller.Immobilize(id, new FloorDto());
+
+            Assert.NotNull(response);
+            var expectedType = typeof(BadRequestResult);
+            Assert.IsType(expectedType, response);
+        }
+
+        [Theory]
+        [InlineData("1223123")]
+        public async void Immobilize_ShouldReturnsBadRequest_WhenPassNullFloorDto(string id)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup(s => s.GetByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(new HardwareDto());
+            mockService.Setup( s => s.UpdateAsync(It.IsAny<string>(), It.IsAny<HardwareDto>()))
+                .Returns(Task.FromResult(0));
+
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.Immobilize(id, new FloorDto());
+
+            Assert.NotNull(response);
+            var expectedType = typeof(BadRequestResult);
+            Assert.IsType(expectedType, response);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("  ")]
+        [InlineData(null)]
+        public async void Immobilize_ShouldReturnsBadRequest_WhenPassInvalidId(string id)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup(s => s.GetByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(new HardwareDto());
+            mockService.Setup( s => s.UpdateAsync(It.IsAny<string>(), It.IsAny<HardwareDto>()))
+                .Returns(Task.FromResult(0));
+
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.Immobilize(id, new FloorDto());
+
+            Assert.NotNull(response);
+            var expectedType = typeof(BadRequestResult);
+            Assert.IsType(expectedType, response);
+        }
+
+#endregion
+
+#region "LoadByFloor"
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        public async void LoadByFloor_ShouldReturnsResponseBodyWithTwoElementInList_And_ElementsIsImmobilized_And_ImmobilizerFloorContainsLevelEqualFloorLevelParameter_WhenPassFloorLevelValid_And_ServiceReturnFullList(int floorLevel)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup( s => s.LoadByFloorAsync(It.IsAny<FloorDto>()))
+                .ReturnsAsync((FloorDto floor) => 
+                {
+                    floor.LevelName = "Infra";                    
+                    return new List<HardwareDto>
+                    {
+                        new HardwareDto { Id = Guid.NewGuid().ToString(), Name = "Computador", ImmobilizerFloor = floor },
+                        new HardwareDto { Id = Guid.NewGuid().ToString(), Name = "Computador", ImmobilizerFloor = floor }
+                    };
+                });
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.LoadByFloor(floorLevel);
+            
+            Assert.NotNull(response);
+            Assert.NotEmpty(response);
+            Assert.Equal(2, response.Count);
+            Assert.All(response, (element) => 
+            {
+                Assert.True(element.IsImmobilized);
+                Assert.True(element.ImmobilizerFloor?.Level == floorLevel);
+            });
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        public async void LoadByFloor_ShouldReturnsResponseBodyWithEmptyList_WhenPassInvalidFloorLevel_And_ServiceReturnEmptyList(int floorLevel)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup( s => s.LoadByFloorAsync(It.IsAny<FloorDto>()))
+                .ReturnsAsync(new List<HardwareDto>());
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.LoadByFloor(floorLevel);
+            Assert.Null(response);
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        public async void LoadByFloor_ShouldReturnsResponseBodyWithNullList_WhenPassInvalidFloorLevel_And_ServiceReturnNullList(int floorLevel)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup( s => s.LoadByFloorAsync(It.IsAny<FloorDto>()))
+                .ReturnsAsync((List<HardwareDto>)null);
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.LoadByFloor(floorLevel);
+            Assert.Null(response);
+        }        
+#endregion
+
+#region "LoadByIsImmobilized"
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public async void LoadByIsImmobilized_ShouldReturnsResponseBodyWithTwoElementInList_WhenPassIsImmobilizedTrueOrFalse_And_ServiceReturnFullList(bool isImmobilized)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup( s => s.LoadByIsImmobilizedAsync(It.Is<bool>(c => c)))
+                .ReturnsAsync((bool value) =>
+                {
+                    return new List<HardwareDto>
+                    {
+                        new HardwareDto
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = "Computador Lenovo",
+                            ImmobilizerFloor = new FloorDto
+                            {
+                                Level = 1,
+                                LevelName = "T.I"
+                            }
+                        },
+                        new HardwareDto
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = "Computador HP",
+                            ImmobilizerFloor = new FloorDto
+                            {
+                                Level = 1,
+                                LevelName = "T.I"
+                            }
+                        }
+                    };
+                });
+            mockService.Setup( s => s.LoadByIsImmobilizedAsync(It.Is<bool>(c => !c)))
+                .ReturnsAsync((bool value) =>
+                {   
+                    return new List<HardwareDto>
+                    {
+                        new HardwareDto
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = "Mouse Apple"
+                        },
+                        new HardwareDto
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Name = "Mouse Dell"
+                        }
+                    };
+                });
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.LoadByIsImmobilized(isImmobilized);
+            
+            Assert.NotNull(response);
+            Assert.NotEmpty(response);
+            Assert.Equal(2, response.Count);
+            Assert.All(response, (element) => Assert.Equal(isImmobilized, element.IsImmobilized));
+        }
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public async void LoadByIsImmobilized_ShouldReturnsResponseBodyWithEmptyList_WhenPassIsImmobilizedTrueOrFalse_And_ServiceReturnEmptyList(bool isImmobilized)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup( s => s.LoadByIsImmobilizedAsync(It.IsAny<bool>()))
+                .ReturnsAsync(new List<HardwareDto>());
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.LoadByIsImmobilized(isImmobilized);
+            
+            Assert.NotNull(response);
+            Assert.Empty(response);
+        }
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public async void LoadByIsImmobilized_ShouldReturnsResponseBodyWithNullList_WhenPassIsImmobilizedTrueOrFalse_And_ServiceReturnNullList(bool isImmobilized)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup( s => s.LoadByIsImmobilizedAsync(It.IsAny<bool>()))
+                .ReturnsAsync((List<HardwareDto>)null);
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.LoadByIsImmobilized(isImmobilized);
+            Assert.Null(response);
+        }       
+#endregion
+
+#region "Delete"
+
+        [Theory]
+        [InlineData("123sdfsxcv")]
+        public async void Delete_ShouldReturnsBadRequest_WhenPassValidId_And_ServiceFoundHardware(string id)
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup(s => s.GetByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync(new HardwareDto { Id = id});
+            mockService.Setup( s => s.UpdateAsync(It.IsAny<string>(), It.IsAny<HardwareDto>()))
+                .Returns(Task.FromResult(0));
+
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.Delete(id);
+
+            Assert.NotNull(response);
+            var expectedType = typeof(NoContentResult);
+            Assert.IsType(expectedType, response);
+        }
+
+        [Fact]
+        public async void Delete_ShouldReturnsBadRequest_WhenPassValidId_And_ServiceNotFoundHardware()
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup(s => s.GetByIdAsync(It.IsAny<string>()))
+                .ReturnsAsync((HardwareDto)null);
+            mockService.Setup( s => s.UpdateAsync(It.IsAny<string>(), It.IsAny<HardwareDto>()))
+                .Returns(Task.FromResult(0));
+
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.Delete(Guid.NewGuid().ToString());
+
+            Assert.NotNull(response);
+            var expectedType = typeof(NotFoundResult);
+            Assert.IsType(expectedType, response);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("  ")]
+        [InlineData(null)]
+        public async void Delete_ShouldReturnsBadRequest_WhenPassInvalidId(string id)
+        {
+            var mockService = new Mock<IHardwareService>();            
+            mockService.Setup( s => s.UpdateAsync(It.IsAny<string>(), It.IsAny<HardwareDto>()))
+                .Returns(Task.FromResult(0));
+
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.Delete(id);
+
+            Assert.NotNull(response);
+            var expectedType = typeof(BadRequestResult);
+            Assert.IsType(expectedType, response);
+        }
+
+#endregion
+
+#region "Update"
         [Theory]
         [InlineData("123456")]
         [InlineData("123askdnaks456")]
@@ -139,7 +499,6 @@ namespace Imobilizados.Test
             var expectedType = typeof(BadRequestResult);
             Assert.IsType(expectedType, response);
         }
-
         
         [Theory]
         [InlineData("123456")]
@@ -195,6 +554,9 @@ namespace Imobilizados.Test
             var expectedType = typeof(BadRequestResult);
             Assert.IsType(expectedType, response);
         }
+#endregion
+
+#region "Add"
 
         [Fact]
         public async void Add_ShouldReturnsCreateAtRoute_WhenPassValidDto_WithEmptyOptionalMembers()
@@ -325,6 +687,9 @@ namespace Imobilizados.Test
             var expectedType = typeof(CreatedAtRouteResult);            
             Assert.IsType(expectedType, response);
         }
+#endregion
+
+#region "GetById"
 
         [Theory]
         [InlineData("1gt2g3i5n6o3nh1l2")]
@@ -361,26 +726,6 @@ namespace Imobilizados.Test
             var expectedType = typeof(BadRequestResult);            
             Assert.IsType(expectedType, response);                
         }
-        
-        [Theory]
-        [InlineData("1gt2g3i5n6o3nh1l2")]
-        public async void GetById_ShouldReturnsStatusCodeOk_And_ResponseBodyIsNotNull_WhenPassValidId(string id)
-        {
-            var mockService = new Mock<IHardwareService>();
-            mockService.Setup( s => s.GetByIdAsync(It.IsAny<string>()))            
-            .ReturnsAsync(new HardwareDto());
-
-            var service = mockService.Object;
-            var controller = new HardwareController(service);
-            var response = await controller.GetById(id);
-
-            Assert.NotNull(response);
-            var expectedType = typeof(OkObjectResult);            
-            Assert.IsType(expectedType, response);
-            
-            var responseOk = response as OkObjectResult;
-            Assert.NotNull(responseOk.Value);            
-        }
 
         [Theory]
         [InlineData("1gt2g3i5n6o3nh1l2")]
@@ -406,23 +751,10 @@ namespace Imobilizados.Test
             var dto = responseOk.Value as HardwareDto;
             Assert.Equal(value, dto.Id);
         }
-        
-        [Theory]
-        [InlineData("1a24dq12d3rf1d")]
-        public async void GetById_ShouldReturnsStatusCodeOk_WhenPassValidId(string value)
-        {
-            var mockService = new Mock<IHardwareService>();
-            mockService.Setup( s => s.GetByIdAsync(It.IsAny<string>()))
-                .ReturnsAsync((string id) => new HardwareDto{ Id = id });
-                
-            var service = mockService.Object;
-            var controller = new HardwareController(service);
-            var response = await controller.GetById(value);
 
-            Assert.NotNull(response);
-            var expectedType = typeof(OkObjectResult);            
-            Assert.IsType(expectedType, response);
-        }
+#endregion 
+
+#region "LoadAdll"
 
         [Fact]
         public async void LoadAll_ShouldReturnsNullList_WhenServiceReturnNullList()
@@ -470,4 +802,7 @@ namespace Imobilizados.Test
             Assert.Equal(4, response.Count);
         }
     }
+
+#endregion
+
 }
