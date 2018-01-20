@@ -27,8 +27,7 @@ namespace Imobilizados.Test
 #region "Immobilize"
 
         [Theory]
-        [InlineData("1223123")]
-        [InlineData(1)]
+        [InlineData("1223123", 1)]
         public async void Immobilize_ShouldReturnsNotFound_WhenPassFloorDtoWithValidLevel_And_ServiceFoundHardware_And_HardwareNotImmobilized(string id, int level)
         {
             var mockService = new Mock<IHardwareService>();
@@ -48,8 +47,7 @@ namespace Imobilizados.Test
         }
 
         [Theory]
-        [InlineData("1223123")]
-        [InlineData(1)]
+        [InlineData("1223123", 1)]
         public async void Immobilize_ShouldReturnsNotFound_WhenPassFloorDtoWithValidLevel_And_ServiceFoundHardware_And_HardwareAlreadyImmbilized(string id, int level)
         {
             var mockService = new Mock<IHardwareService>();
@@ -69,8 +67,7 @@ namespace Imobilizados.Test
         }
 
         [Theory]
-        [InlineData("1223123")]
-        [InlineData(1)]
+        [InlineData("1223123", 1)]
         public async void Immobilize_ShouldReturnsNotFound_WhenPassFloorDtoWithValidLevel_And_ServiceNotFoundHardware(string id, int level)
         {
             var mockService = new Mock<IHardwareService>();
@@ -90,8 +87,7 @@ namespace Imobilizados.Test
         }
 
         [Theory]
-        [InlineData("1223123")]
-        [InlineData(-1)]
+        [InlineData("1223123", -1)]
         public async void Immobilize_ShouldReturnsBadRequest_WhenPassFloorDtoWithInvalidLevel(string id, int level)
         {
             var mockService = new Mock<IHardwareService>();
@@ -214,7 +210,8 @@ namespace Imobilizados.Test
             var service = mockService.Object;
             var controller = new HardwareController(service);
             var response = await controller.LoadByFloor(floorLevel);
-            Assert.Null(response);
+            Assert.NotNull(response);
+            Assert.Empty(response);
         }
 
         [Theory]

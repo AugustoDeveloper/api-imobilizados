@@ -16,9 +16,15 @@ namespace Imobilizados.Infrastructure.MongoDb
 
         protected override string CollectionName => "Hardwares";
 
-        public override async Task<List<Hardware>> LoadByIsImmobilized(bool isImmobilized)
+        public async Task<List<Hardware>> LoadByFloorAsync(Floor floor)
         {
             return await Collection.Find( h => h.IsImmobilized).ToListAsync();
         }
+
+        public async Task<List<Hardware>> LoadByIsImmobilizedAsync(bool isImmobilized)
+        {
+            return await Collection.Find( h => h.IsImmobilized).ToListAsync();
+        }
+
     }
 }
