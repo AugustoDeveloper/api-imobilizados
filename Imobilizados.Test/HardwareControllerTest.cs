@@ -14,7 +14,7 @@ namespace Imobilizados.Test
     public class HardwareControllerTest
     {
         [Fact]
-        public async void Add_PassBlankDto_RespondsBadRequest_ReturnTrue()
+        public async void Add_ShouldReturnsBadRequest_WhenPassBlankDto()
         {
             var mockService = new Mock<IHardwareService>();
             mockService.Setup( s => s.AddAsync(It.IsAny<HardwareDto>()))
@@ -37,7 +37,7 @@ namespace Imobilizados.Test
 
         [Theory]
         [InlineData("1gt2g3i5n6o3nh1l2")]
-        public async void GetById_RespondsNotFound_ReturnsTrue(string value)
+        public async void GetById_ShouldReturnsRequestNotFound_WhenServiceReturnNull(string value)
         {
             var mockService = new Mock<IHardwareService>();
             mockService.Setup( s => s.GetByIdAsync(It.IsAny<string>()))            
@@ -56,7 +56,7 @@ namespace Imobilizados.Test
         [InlineData(null)]
         [InlineData("")]
         [InlineData("  ")]
-        public async void GetById_PassInvalidId_RespondsBadRequest_ReturnsTrue(string id)
+        public async void GetById_ShouldReturnsBadRequest_WhenIdRequestIsInvalid(string id)
         {
             var mockService = new Mock<IHardwareService>();
             mockService.Setup( s => s.GetByIdAsync(It.IsAny<string>()))            
@@ -73,7 +73,7 @@ namespace Imobilizados.Test
         
         [Theory]
         [InlineData("1gt2g3i5n6o3nh1l2")]
-        public async void GetById_RespondsOk_WithBody_ReturnsTrue(string id)
+        public async void GetById_ShouldReturnsStatusCodeOk_And_ResponseBodyIsNotNull_WhenPassValidId(string id)
         {
             var mockService = new Mock<IHardwareService>();
             mockService.Setup( s => s.GetByIdAsync(It.IsAny<string>()))            
@@ -96,7 +96,7 @@ namespace Imobilizados.Test
         [InlineData("1gt2g3i112njiv2")]
         [InlineData("1gt1poxon6o3nh1l2")]
         [InlineData("1gt2g3i5n6123asc2")]
-        public async void GetById_PassValidId_RespondsOk_WithBody_ReturnsTrue(string value)
+        public async void GetById_ShouldReturnsStatusCodeOk_And_ResponseBodyIsNotNul_And_DtoIdEqualsRequestId_WhenPassValidId(string value)
         {
             var mockService = new Mock<IHardwareService>();
             mockService.Setup( s => s.GetByIdAsync(It.IsAny<string>()))
@@ -118,7 +118,7 @@ namespace Imobilizados.Test
         
         [Theory]
         [InlineData("1a24dq12d3rf1d")]
-        public async void GetById_RespondsOk_ReturnsTrue(string value)
+        public async void GetById_ShouldReturnsStatusCodeOk_WhenPassValidId(string value)
         {
             var mockService = new Mock<IHardwareService>();
             mockService.Setup( s => s.GetByIdAsync(It.IsAny<string>()))
@@ -134,7 +134,7 @@ namespace Imobilizados.Test
         }
 
         [Fact]
-        public async void LoadAllImmobilized_RespondsOk_WithEmptyList_ReturnsTrue()
+        public async void LoadAllImmobilized_ShouldReturnsStatusCodeOk_WhenServiceReturnsEmptyList()
         {
             var mockService = new Mock<IHardwareService>();
             mockService.Setup( s => s.LoadAllAsync())
@@ -155,7 +155,7 @@ namespace Imobilizados.Test
         }
 
         [Fact]
-        public async void LoadAllImmobilized_RespondsOk_WithNullReference_ReturnsTrue()
+        public async void LoadAllImmobilized_ShouldReturnsStatusCodeOk_WhenServiceReturnEmpyOrNullList()
         {
             var mockService = new Mock<IHardwareService>();
             mockService.Setup( s => s.LoadAllAsync())
@@ -173,7 +173,7 @@ namespace Imobilizados.Test
         }
 
         [Fact]
-        public async void LoadAllImmobilized_RespondsOk_ReturnsTrue()
+        public async void LoadAllImmobilized_ShouldReturnsStatusCodeOk_WhenServiceReturnFullList()
         {
             var mockService = new Mock<IHardwareService>();
             mockService.Setup( s => s.LoadAllAsync())
@@ -193,7 +193,7 @@ namespace Imobilizados.Test
         }
 
         [Fact]
-        public async void LoadAllImmobilized_RespondsOk_WithFourElement_ReturnsTrueAndFour()
+        public async void LoadAllImmobilized_ShouldReturnsStatusCodeOk_And_ResponseBodyNotNull_And_ResponseBodyWithFourElements()
         {
             var mockService = new Mock<IHardwareService>();
             mockService.Setup( s => s.LoadAllAsync())
