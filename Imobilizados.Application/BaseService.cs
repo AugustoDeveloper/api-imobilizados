@@ -29,16 +29,15 @@ namespace Imobilizados.Application
             await Repository.AddAsync(entity);
         }
         
-        public async Task<TDto> UpdateAsync(string id, TDto dto)
+        public async Task UpdateAsync(string id, TDto dto)
         {
             var entity = TransformToEntity(dto);
-            var updatedEntity = await Repository.UpdateAsync(id, entity);
-            return TransformToDto(updatedEntity);
+            await Repository.UpdateAsync(id, entity);
         }
 
-        public async Task<bool> DeleteAsync(string id)
+        public async Task DeleteAsync(string id)
         {
-            return await Repository.DeleteAsync(id);
+            await Repository.DeleteAsync(id);
         }
 
         public async Task<List<TDto>> LoadAllAsync()

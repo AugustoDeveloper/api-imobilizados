@@ -31,22 +31,14 @@ namespace Imobilizados.Infrastructure.MongoDb.Base
              await Collection.InsertOneAsync(entity);
         }
 
-        public override bool Delete(string id)
+        public override void Delete(string id)
         {
-            var filter = Builders<TEntity>.Filter;
-            string objectId = Convert.ToString(id);
-            var criteria = filter.Eq(e => e.Id, objectId);
-            DeleteResult result = Collection.DeleteOne(criteria);
-            return result.IsAcknowledged;
+             Collection.DeleteOne(e => e.Id == id);
         }
 
-        public override async Task<bool> DeleteAsync(string id)
+        public override async Task DeleteAsync(string id)
         {
-
-            var filter = Builders<TEntity>.Filter;
-            var criteria = filter.Eq(e => e.Id, id);
-            var result = await Collection.DeleteOneAsync(criteria);
-            return result.IsAcknowledged;
+            await Collection.DeleteOneAsync(e => e.Id == id);
         }
 
         public override TEntity GetById(string id)
@@ -81,22 +73,14 @@ namespace Imobilizados.Infrastructure.MongoDb.Base
             return batch;
         }
 
-        public override TEntity Update(string id, TEntity entity)
+        public override void Update(string id, TEntity entity)
         {
-            var filter = Builders<TEntity>.Filter;
-            var criteria = filter.Eq(e => e.Id, id);
-            var batch = Collection.FindOneAndReplace(criteria, entity);
-            return batch;
+            Collection.ReplaceOne(e => e.Id == id, entity);
         }
 
-        public override async Task<TEntity> UpdateAsync(string id, TEntity entity)
+        public override async Task UpdateAsync(string id, TEntity entity)
         {
-            var filter = Builders<TEntity>.Filter;
-            var criteria = filter.Eq(e => e.Id, id);
-            var batch = await Collection.FindOneAndReplaceAsync(criteria, entity);
-            
-            return batch;
+            await Collection.ReplaceOneAsync(e => e.Id == id, entity);
         }
-
     }
 }

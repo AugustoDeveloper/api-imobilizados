@@ -13,8 +13,8 @@ namespace Imobilizados.Application.Interfaces
                                              where TRepository : IRepository<TEntity>
     {
         Task AddAsync(TDto dto);
-        Task<TDto> UpdateAsync(string id, TDto dto);
-        Task<bool> DeleteAsync(string id);
+        Task UpdateAsync(string id, TDto dto);
+        Task DeleteAsync(string id);
         Task<List<TDto>> LoadAllAsync();
         Task<TDto> GetByIdAsync(string id);
     }

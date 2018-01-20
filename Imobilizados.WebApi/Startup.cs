@@ -46,7 +46,6 @@ namespace Imobilizados.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-
             app.UseMvc();
         }
 

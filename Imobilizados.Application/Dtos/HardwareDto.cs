@@ -8,7 +8,7 @@ namespace Imobilizados.Application.Dtos
         #region 'Properties'
 
         [Display(Name = "id")]
-        [Required]
+        [Key]
         public string Id { get; set; }
 
         [Display(Name = "name")]

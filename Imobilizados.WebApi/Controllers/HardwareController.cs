@@ -5,12 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Imobilizados.Application.Dtos;
 using Imobilizados.Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Imobilizados.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    [ValidateModel]
     public class HardwareController : Controller
     {
         private IHardwareService _service;
@@ -22,16 +22,18 @@ namespace Imobilizados.WebApi.Controllers
 
         // GET api/values
         [HttpGet("/all")]
-        public async Task<IActionResult> LoadAllAsync()
-        {
-            var collection = await _service.LoadAllAsync();
-            return Ok(collection);
+        public async Task<List<HardwareDto>> LoadAll()
+        { 
+            return await _service.LoadAllAsync();
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([Required] string id)
         {
-            if (string.IsNullOrEmpty(id) || string.IsNullOrWhiteSpace(id)) return BadRequest(ModelState);
+            if (string.IsNullOrEmpty(id) || string.IsNullOrWhiteSpace(id)) 
+            {
+                return BadRequest();
+            }
 
             var hardware = await _service.GetByIdAsync(id);
             if (hardware != null)
@@ -51,19 +53,50 @@ namespace Imobilizados.WebApi.Controllers
 
             await _service.AddAsync(dto);
 
-            return NoContent();
+            return CreatedAtRoute("", new {id = dto.Id}, dto);
         }
 
-        // PUT api/values/5
+        
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> Update([Required]string id, [FromBody]HardwareDto dto)
         {
+            if (string.IsNullOrEmpty(id) || 
+                string.IsNullOrWhiteSpace(id) ||
+                dto == null || 
+                dto.Id != id ||
+                !ModelState.IsValid) 
+            {
+                return BadRequest();
+            }
+
+            var existsDto = await _service.GetByIdAsync(id);
+            if (existsDto == null) 
+            {
+                return NotFound();
+            }
+
+            await _service.UpdateAsync(id, dto);
+            return NoContent();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
+            if (string.IsNullOrEmpty(id) || 
+                string.IsNullOrWhiteSpace(id)) 
+            {
+                return BadRequest();
+            }
+
+            var existsDto = await _service.GetByIdAsync(id);
+            if (existsDto == null) 
+            {
+                return NotFound();
+            }
+
+            await _service.DeleteAsync(id);
+            return NoContent();
         }
     }
 }
