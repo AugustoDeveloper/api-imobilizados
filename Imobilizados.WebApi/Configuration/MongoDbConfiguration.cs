@@ -63,8 +63,7 @@ namespace Imobilizados.WebApi
             {
                 BsonClassMap.RegisterClassMap<Floor>(mapper =>
                 {
-                    mapper.MapIdMember( f => f.Id)
-                        .SetElementName("id");
+                    mapper.UnmapMember(f => f.Id);
                     mapper.MapMember(f => f.Level)
                         .SetElementName("level")
                         .SetIsRequired(true)

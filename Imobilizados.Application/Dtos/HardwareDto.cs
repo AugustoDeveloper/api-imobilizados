@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Imobilizados.Application.Dtos
 {
@@ -7,27 +9,27 @@ namespace Imobilizados.Application.Dtos
     {
         #region 'Properties'
 
-        [Display(Name = "id")]
+        [JsonProperty( PropertyName = "id")]
         [Key]
         public string Id { get; set; }
 
-        [Display(Name = "name")]
+        [JsonProperty(PropertyName = "name")]
         [Required]
         public string Name { get; set; }
 
-        [Display(Name = "brand")]
+        [JsonProperty(PropertyName = "brand")]
         public string Brand { get; set; }
 
-        [Display(Name = "factory_code")]
+        [JsonProperty(PropertyName = "factory_code")]
         public string FacoryCode { get; set; }
 
-        [Display(Name = "description")]
+        [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
-        [Display(Name = "is_immobilized")]
+        [JsonProperty(PropertyName = "is_immobilized")]
         public bool IsImmobilized => ImmobilizerFloor?.Level > -1;
 
-        [Display(Name = "immobilizer_floor")]
+        [JsonProperty(PropertyName = "immobilizer_floor")]
         public FloorDto ImmobilizerFloor { get; set; }
 
         #endregion

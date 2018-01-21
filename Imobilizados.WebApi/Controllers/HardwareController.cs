@@ -26,12 +26,12 @@ namespace Imobilizados.WebApi.Controllers
             return await _service.LoadAllAsync();
         }
 
-        [HttpGet("{id:length(24)}", Name = "GetById")]
+        [HttpGet("{id:length(24)}")]
         public async Task<IActionResult> GetById([Required] string id)
         {
             if (string.IsNullOrEmpty(id) || string.IsNullOrWhiteSpace(id)) 
             {
-                return BadRequest();
+                return BadRequest(new { message = "The request id is invalid.", requestId = id });
             }
 
             var hardware = await _service.GetByIdAsync(id);
@@ -41,18 +41,21 @@ namespace Imobilizados.WebApi.Controllers
             }
             else
             {
-                return NotFound();
+                return NotFound(new { message = "The hardware was not found.", requestId = id });
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]HardwareDto dto)
         {
-            if (dto == null || !ModelState.IsValid)  return BadRequest(ModelState);
+            if (dto == null || !ModelState.IsValid || !string.IsNullOrEmpty(dto.Id))
+            {
+                return BadRequest(new { message = "The request is invalid", request = dto });
+            }  
 
-            await _service.AddAsync(dto);
+            var insertedDto = await _service.AddAsync(dto);
 
-            return Created("/", dto);
+            return Created("/", insertedDto);
         }
 
         
@@ -65,13 +68,13 @@ namespace Imobilizados.WebApi.Controllers
                 dto.Id != id ||
                 !ModelState.IsValid) 
             {
-                return BadRequest();
+                return BadRequest(new { message = "The request is invalid", requestId = id, request = dto });
             }
 
             var existsDto = await _service.GetByIdAsync(id);
             if (existsDto == null) 
             {
-                return NotFound();
+                return NotFound(new { message = "The hardware was not found", requestId = id });
             }
 
             await _service.UpdateAsync(id, dto);
@@ -84,13 +87,13 @@ namespace Imobilizados.WebApi.Controllers
             if (string.IsNullOrEmpty(id) || 
                 string.IsNullOrWhiteSpace(id)) 
             {
-                return BadRequest();
+                return BadRequest(new { message = "The request is invalid", requestId = id });
             }
 
             var existsDto = await _service.GetByIdAsync(id);
             if (existsDto == null) 
             {
-                return NotFound();
+                return NotFound(new { message = "The hardware was not found", requestId = id });
             }
 
             await _service.DeleteAsync(id);
@@ -118,18 +121,18 @@ namespace Imobilizados.WebApi.Controllers
                 (floor?.Level <  0)
                 ) 
             {
-                return BadRequest(new { message = "Invalid request" });
+                return BadRequest(new { message = "Invalid request", requestId = id, request = floor });
             }
 
             var existsDto = await _service.GetByIdAsync(id);
             if (existsDto == null) 
             {
-                return NotFound(new { message = "Hardware not found" });
+                return NotFound(new { message = "Hardware not found", request = id });
             }
 
             if (existsDto.IsImmobilized)
             {
-                return BadRequest(new { message = "Hardware is already immobilized" });
+                return BadRequest(new { message = "Hardware is already immobilized", requestId = id, foundDto = existsDto, request = floor });
             }
 
             existsDto.ImmobilizerFloor = floor;

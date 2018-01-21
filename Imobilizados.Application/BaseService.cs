@@ -23,11 +23,11 @@ namespace Imobilizados.Application
             Repository = repository;
         }
 
-        public async Task AddAsync(TDto dto)
+        public async Task<TDto> AddAsync(TDto dto)
         {
             var entity = TransformToEntity(dto);
             await Repository.AddAsync(entity);
-            dto = TransformToDto(entity);
+            return TransformToDto(entity);
         }
         
         public async Task UpdateAsync(string id, TDto dto)

@@ -62,7 +62,7 @@ namespace Imobilizados.Test
             var response = await controller.Immobilize(id, new FloorDto {Level = level, LevelName = "Finance" });
 
             Assert.NotNull(response);
-            var expectedType = typeof(BadRequestResult);
+            var expectedType = typeof(BadRequestObjectResult);
             Assert.IsType(expectedType, response);
         }
 
@@ -82,7 +82,7 @@ namespace Imobilizados.Test
             var response = await controller.Immobilize(id, new FloorDto {Level = level, LevelName = "Finance" });
 
             Assert.NotNull(response);
-            var expectedType = typeof(NotFoundResult);
+            var expectedType = typeof(NotFoundObjectResult);
             Assert.IsType(expectedType, response);
         }
 
@@ -102,7 +102,7 @@ namespace Imobilizados.Test
             var response = await controller.Immobilize(id, new FloorDto {Level = level});
 
             Assert.NotNull(response);
-            var expectedType = typeof(BadRequestResult);
+            var expectedType = typeof(BadRequestObjectResult);
             Assert.IsType(expectedType, response);
         }
 
@@ -122,7 +122,7 @@ namespace Imobilizados.Test
             var response = await controller.Immobilize(id, new FloorDto());
 
             Assert.NotNull(response);
-            var expectedType = typeof(BadRequestResult);
+            var expectedType = typeof(BadRequestObjectResult);
             Assert.IsType(expectedType, response);
         }
 
@@ -141,7 +141,7 @@ namespace Imobilizados.Test
             var response = await controller.Immobilize(id, new FloorDto());
 
             Assert.NotNull(response);
-            var expectedType = typeof(BadRequestResult);
+            var expectedType = typeof(BadRequestObjectResult);
             Assert.IsType(expectedType, response);
         }
 
@@ -162,7 +162,7 @@ namespace Imobilizados.Test
             var response = await controller.Immobilize(id, new FloorDto());
 
             Assert.NotNull(response);
-            var expectedType = typeof(BadRequestResult);
+            var expectedType = typeof(BadRequestObjectResult);
             Assert.IsType(expectedType, response);
         }
 
@@ -356,7 +356,7 @@ namespace Imobilizados.Test
             var response = await controller.Delete(Guid.NewGuid().ToString());
 
             Assert.NotNull(response);
-            var expectedType = typeof(NotFoundResult);
+            var expectedType = typeof(NotFoundObjectResult);
             Assert.IsType(expectedType, response);
         }
 
@@ -375,7 +375,7 @@ namespace Imobilizados.Test
             var response = await controller.Delete(id);
 
             Assert.NotNull(response);
-            var expectedType = typeof(BadRequestResult);
+            var expectedType = typeof(BadRequestObjectResult);
             Assert.IsType(expectedType, response);
         }
 
@@ -436,7 +436,7 @@ namespace Imobilizados.Test
             var updatingDto = new HardwareDto();
             var response = await controller.Update(idParameter, updatingDto);
             Assert.NotNull(response);
-            var expectedType = typeof(BadRequestResult);
+            var expectedType = typeof(BadRequestObjectResult);
             
             Assert.IsType(expectedType, response);
         }
@@ -462,7 +462,7 @@ namespace Imobilizados.Test
             var response = await controller.Update(idParameter, null);
 
             Assert.NotNull(response);
-            var expectedType = typeof(BadRequestResult);
+            var expectedType = typeof(BadRequestObjectResult);
             Assert.IsType(expectedType, response);            
         }
 
@@ -493,7 +493,7 @@ namespace Imobilizados.Test
             );
 
             Assert.NotNull(response);
-            var expectedType = typeof(BadRequestResult);
+            var expectedType = typeof(BadRequestObjectResult);
             Assert.IsType(expectedType, response);
         }
         
@@ -521,7 +521,7 @@ namespace Imobilizados.Test
             );
 
             Assert.NotNull(response);
-            var expectedType = typeof(NotFoundResult);
+            var expectedType = typeof(NotFoundObjectResult);
             Assert.IsType(expectedType, response);
         }
 
@@ -548,7 +548,7 @@ namespace Imobilizados.Test
             );
 
             Assert.NotNull(response);
-            var expectedType = typeof(BadRequestResult);
+            var expectedType = typeof(BadRequestObjectResult);
             Assert.IsType(expectedType, response);
         }
 #endregion
@@ -560,7 +560,7 @@ namespace Imobilizados.Test
         {
             var mockService = new Mock<IHardwareService>();
             mockService.Setup( s => s.AddAsync(It.IsAny<HardwareDto>()))
-                .Returns(Task.FromResult(0));
+                .ReturnsAsync((HardwareDto dto) => dto);
 
             var service = mockService.Object;
             var controller = new HardwareController(service);
@@ -577,6 +577,30 @@ namespace Imobilizados.Test
             Assert.IsType(expectedType, response);
         }        
 
+        
+        [Fact]
+        public async void Add_ShouldReturnsBadRequest_WhenPassDtoWithId()
+        {
+            var mockService = new Mock<IHardwareService>();
+            mockService.Setup( s => s.AddAsync(It.IsAny<HardwareDto>()))
+                .Callback((HardwareDto dto) =>
+                {
+                    dto.Name = "";
+                    dto.Id = Guid.NewGuid().ToString();
+                    Console.WriteLine($"{dto.Id}");
+                })
+                .ReturnsAsync((HardwareDto dto) => dto);
+
+
+            var service = mockService.Object;
+            var controller = new HardwareController(service);
+            var response = await controller.Create(new HardwareDto { Id = Guid.NewGuid().ToString()});            
+
+            Assert.NotNull(response);
+            var expectedType = typeof(BadRequestObjectResult);            
+            Assert.IsType(expectedType, response);
+        }
+
         [Fact]
         public async void Add_ShouldReturnsBadRequest_WhenPassNullDto()
         {
@@ -588,7 +612,7 @@ namespace Imobilizados.Test
                     dto.Id = Guid.NewGuid().ToString();
                     Console.WriteLine($"{dto.Id}");
                 })
-                .Returns(Task.FromResult(0));
+                .ReturnsAsync((HardwareDto dto) => dto);
 
 
             var service = mockService.Object;
@@ -613,7 +637,7 @@ namespace Imobilizados.Test
                     dto.Id = Guid.NewGuid().ToString();
                     Console.WriteLine($"{dto.Id}");
                 })
-                .Returns(Task.FromResult(0));
+                .ReturnsAsync((HardwareDto dto) => dto);
 
 
             var service = mockService.Object;
@@ -641,7 +665,7 @@ namespace Imobilizados.Test
                     dto.Id = Guid.NewGuid().ToString();
                     Console.WriteLine($"{dto.Id}");
                 })
-                .Returns(Task.FromResult(0));
+                .ReturnsAsync((HardwareDto dto) => dto);
 
 
             var service = mockService.Object;
@@ -672,7 +696,7 @@ namespace Imobilizados.Test
                 {                    
                     dto.Id = Guid.NewGuid().ToString();                    
                 })
-                .Returns(Task.FromResult(0));
+                .ReturnsAsync((HardwareDto dto) => dto);
 
 
             var service = mockService.Object;
@@ -701,7 +725,7 @@ namespace Imobilizados.Test
             var response = await controller.GetById(value);
 
             Assert.NotNull(response);
-            var expectedType = typeof(NotFoundResult);            
+            var expectedType = typeof(NotFoundObjectResult);            
             Assert.IsType(expectedType, response);                
         }
 
@@ -720,7 +744,7 @@ namespace Imobilizados.Test
             var response = await controller.GetById(id);
 
             Assert.NotNull(response);
-            var expectedType = typeof(BadRequestResult);            
+            var expectedType = typeof(BadRequestObjectResult);            
             Assert.IsType(expectedType, response);                
         }
 
