@@ -1,0 +1,1790 @@
+{
+	"info": {
+		"name": "Project Api-Imobilizado",
+		"_postman_id": "2950e4d0-eafb-0443-a690-0641339907e8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[POST] Create a new hardware",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"name\": \"Mouse\",\n        \"brand\": \"Microsoft\",\n        \"factory_code\": \"1234567890\",\n        \"description\": \"Mouse infravermelho\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/hardware",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"hardware"
+					]
+				},
+				"description": "Método de criação de novo equipamento."
+			},
+			"response": [
+				{
+					"id": "373d6f4a-8af3-4ec4-8eba-abcafe99d86d",
+					"name": "[Example][Valid][POST] Create a new hardware not immobilized",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Mouse - 2\",\n        \"brand\": \"LG\",\n        \"factory_code\": \"1234567890\",\n        \"description\": \"Mouse infravermelho\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:06:19 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Location",
+							"value": "/",
+							"name": "Location",
+							"description": "Used in redirection, or when a new resource has been created."
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 523,
+					"body": "{\"id\":\"5a64c88cb9a91e137e62d9ea\",\"name\":\"Mouse - 2\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":false,\"immobilizer_floor\":null}"
+				},
+				{
+					"id": "c7cc5ea4-71e5-47be-87e7-87b4d5d3df15",
+					"name": "[Example][Valid][POST] Create a new hardware immobilized",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Mouse - 2\",\n        \"brand\": \"LG\",\n        \"factory_code\": \"1234567890\",\n        \"description\": \"Mouse infravermelho\",\n        \"immobilizer_floor\": {\n        \t\"level\": \"1\",\n        \t\"level_name\":\"TI\"\n        }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:17:44 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Location",
+							"value": "/",
+							"name": "Location",
+							"description": "Used in redirection, or when a new resource has been created."
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 46,
+					"body": "{\"id\":\"5a64cb39b9a91e137e62d9ec\",\"name\":\"Mouse - 2\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":true,\"immobilizer_floor\":{\"level\":1,\"level_name\":\"TI\"}}"
+				},
+				{
+					"id": "a4ad43fc-c66e-4956-b009-b9900c49f562",
+					"name": "[Example][Invalid][POST] Create a new hardware, with floor's level is empty",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Mouse - 2\",\n        \"brand\": \"LG\",\n        \"factory_code\": \"1234567890\",\n        \"description\": \"Mouse infravermelho\",\n        \"immobilizer_floor\": {\n        \t\"level\": \"\",\n        \t\"level_name\":\"TI\"\n        }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:19:25 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 11,
+					"body": "{\"message\":\"The request is invalid\",\"request\":null}"
+				},
+				{
+					"id": "dc366cf9-a96e-415f-b798-846e005a6b72",
+					"name": "[Example][Invalid][POST] Create a new hardware, with floor's level is blank",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Mouse - 2\",\n        \"brand\": \"LG\",\n        \"factory_code\": \"1234567890\",\n        \"description\": \"Mouse infravermelho\",\n        \"immobilizer_floor\": {\n        \t\"level\": \" \",\n        \t\"level_name\":\"TI\"\n        }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:20:45 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 35,
+					"body": "{\"message\":\"The request is invalid\",\"request\":null}"
+				},
+				{
+					"id": "75e78f00-0d95-44b9-ad85-74543ab83255",
+					"name": "[Example][Invalid][POST] Create a new hardware, with floor's level is null",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Mouse - 2\",\n        \"brand\": \"LG\",\n        \"factory_code\": \"1234567890\",\n        \"description\": \"Mouse infravermelho\",\n        \"immobilizer_floor\": {\n        \t\"level\": null,\n        \t\"level_name\":\"TI\"\n        }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:21:24 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 37,
+					"body": "{\"message\":\"The request is invalid\",\"request\":null}"
+				},
+				{
+					"id": "ed817f73-15af-4b78-88d9-8cfd6c1aeb34",
+					"name": "[Example][Invalid][POST] Create a new hardware, with empty name",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"\",\n        \"brand\": \"LG\",\n        \"factory_code\": \"1234567890\",\n        \"description\": \"Mouse infravermelho\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:23:16 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 5,
+					"body": "{\"message\":\"The request is invalid\",\"request\":{\"id\":null,\"name\":\"\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":false,\"immobilizer_floor\":null}}"
+				},
+				{
+					"id": "cd9c9421-3d1f-4f64-a828-8ccb15d8e817",
+					"name": "[Example][Invalid][POST] Create a new hardware, with blank name",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \" \",\n        \"brand\": \"LG\",\n        \"factory_code\": \"1234567890\",\n        \"description\": \"Mouse infravermelho\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:24:25 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 33,
+					"body": "{\"message\":\"The request is invalid\",\"request\":{\"id\":null,\"name\":\" \",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":false,\"immobilizer_floor\":null}}"
+				},
+				{
+					"id": "32449ca7-6a2d-458f-b557-ebea0d62be7f",
+					"name": "[Example][Invalid][POST] Create a new hardware, with null name",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": null,\n        \"brand\": \"LG\",\n        \"factory_code\": \"1234567890\",\n        \"description\": \"Mouse infravermelho\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:25:05 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 26,
+					"body": "{\"message\":\"The request is invalid\",\"request\":{\"id\":null,\"name\":null,\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":false,\"immobilizer_floor\":null}}"
+				},
+				{
+					"id": "faf4c4ca-1a3f-4127-9863-6f43ad2ae9b3",
+					"name": "[Example][Valid][POST] Create a new hardware",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"name\": \"Mouse\",\n        \"brand\": \"Microsoft\",\n        \"factory_code\": \"1234567890\",\n        \"description\": \"Mouse infravermelho\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:41:31 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Location",
+							"value": "/",
+							"name": "Location",
+							"description": "Used in redirection, or when a new resource has been created."
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 51,
+					"body": "{\"id\":\"5a64d0ccb9a91e137e62d9ef\",\"name\":\"Mouse\",\"brand\":\"Microsoft\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":false,\"immobilizer_floor\":null}"
+				}
+			]
+		},
+		{
+			"name": "[GET] List all hardwares",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:5000/api/hardware/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"hardware",
+						"all"
+					]
+				},
+				"description": "Método get que lista todos os equipamentos cadastrados"
+			},
+			"response": [
+				{
+					"id": "71595b74-dbe9-44fe-90f5-d39b08c976b5",
+					"name": "[Example][Valid][GET] List all hardwares",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"all"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:26:57 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 303,
+					"body": "[{\"id\":\"5a64c88cb9a91e137e62d9ea\",\"name\":\"Mouse - 2\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":false,\"immobilizer_floor\":null},{\"id\":\"5a64ca37b9a91e137e62d9eb\",\"name\":\"Mouse - 2\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":true,\"immobilizer_floor\":{\"level\":1,\"level_name\":\"TI\"}},{\"id\":\"5a64cb39b9a91e137e62d9ec\",\"name\":\"Mouse - 2\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":true,\"immobilizer_floor\":{\"level\":1,\"level_name\":\"TI\"}},{\"id\":\"5a64cb97b9a91e137e62d9ed\",\"name\":\"Mouse - 2\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":true,\"immobilizer_floor\":{\"level\":2,\"level_name\":\"TI\"}},{\"id\":\"5a64cc7eb9a91e137e62d9ee\",\"name\":\"1a\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":false,\"immobilizer_floor\":null}]"
+				}
+			]
+		},
+		{
+			"name": "[GET] Detail a specific hardware",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:5000/api/hardware/5a64c88cb9a91e137e62d9ea",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"hardware",
+						"5a64c88cb9a91e137e62d9ea"
+					]
+				},
+				"description": "Método GET que detalha um hardware especifico por id"
+			},
+			"response": [
+				{
+					"id": "589dda31-1c87-46f9-ae20-e3a416467fd6",
+					"name": "[Example][Valid][GET] Detail a specific hardware",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/5a64c88cb9a91e137e62d9ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"5a64c88cb9a91e137e62d9ea"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:31:31 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 111,
+					"body": "{\"id\":\"5a64c88cb9a91e137e62d9ea\",\"name\":\"Mouse - 2\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":false,\"immobilizer_floor\":null}"
+				},
+				{
+					"id": "d2379589-7ae5-416f-b91f-cd7b2b6eccb3",
+					"name": "[Example][Invalid][GET] Detail a specific hardware with not exists id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/5a64c88cb9a91e137e62d9eb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"5a64c88cb9a91e137e62d9eb"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 18:07:58 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 47,
+					"body": "{\"message\":\"The hardware was not found.\",\"requestId\":\"5a64c88cb9a91e137e62d9eb\"}"
+				}
+			]
+		},
+		{
+			"name": "[PUT] Update a specific hardware",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"5a64c88cb9a91e137e62d9ea\",\n    \"name\": \"Teclado sem fio\",\n    \"brand\": \"Microsft\",\n    \"factory_code\": \"1234567890\",\n    \"description\": \"Teclado bluetooth\",\n    \"is_immobilized\": false,\n    \"immobilizer_floor\": null\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/hardware/5a64c88cb9a91e137e62d9ea",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"hardware",
+						"5a64c88cb9a91e137e62d9ea"
+					]
+				},
+				"description": "Um método PUT atualiza um hardware especifico"
+			},
+			"response": [
+				{
+					"id": "f367d646-979e-41be-b6c8-959c86ac368a",
+					"name": "[Example][Valid][PUT] Update a specific hardware",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"5a64c88cb9a91e137e62d9ea\",\n    \"name\": \"Teclado sem fio\",\n    \"brand\": \"Microsft\",\n    \"factory_code\": \"1234567890\",\n    \"description\": \"Teclado bluetooth\",\n    \"is_immobilized\": false,\n    \"immobilizer_floor\": null\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/5a64c88cb9a91e137e62d9ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"5a64c88cb9a91e137e62d9ea"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:38:41 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 199,
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "[PUT] Immbilize a specific hardware",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"level\": \"16\",\n\t\"level_name\":\"administracao\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/hardware/immobilize/5a64c88cb9a91e137e62d9ea",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"hardware",
+						"immobilize",
+						"5a64c88cb9a91e137e62d9ea"
+					]
+				},
+				"description": "Um método PUT que imobiliza um equipamento em um andar "
+			},
+			"response": [
+				{
+					"id": "57096c56-14c1-4101-8353-777ded7fd7b5",
+					"name": "[Example][Valid][PUT] Immbilize a specific hardware",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"level\": \"16\",\n\t\"level_name\":\"administracao\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/immobilize/5a64c88cb9a91e137e62d9ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"immobilize",
+								"5a64c88cb9a91e137e62d9ea"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:44:12 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 46,
+					"body": ""
+				},
+				{
+					"id": "d4acf896-fc09-45c9-8a3b-d36a36cc949e",
+					"name": "[Example][Invalid][PUT] Immbilize a specific hardware, with hardware is already immobilized",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"level\": \"16\",\n\t\"level_name\":\"administracao\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/immobilize/5a64ca37b9a91e137e62d9eb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"immobilize",
+								"5a64ca37b9a91e137e62d9eb"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:46:37 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 55,
+					"body": "{\"message\":\"Hardware is already immobilized\",\"requestId\":\"5a64ca37b9a91e137e62d9eb\",\"foundDto\":{\"id\":\"5a64ca37b9a91e137e62d9eb\",\"name\":\"Mouse - 2\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":true,\"immobilizer_floor\":{\"level\":1,\"level_name\":\"TI\"}},\"request\":{\"level\":16,\"level_name\":\"administracao\"}}"
+				},
+				{
+					"id": "8001d9fa-2a8d-4e13-83a7-3220ba6e7c05",
+					"name": "[Example][Invalid][PUT] Immbilize a specific hardware with invalid hardware",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"level\": \"16\",\n\t\"level_name\":\"administracao\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/immobilize/5a64ca37b9a91e137e62d9ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"immobilize",
+								"5a64ca37b9a91e137e62d9ea"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:49:20 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 35,
+					"body": "{\"message\":\"Hardware not found\",\"request\":\"5a64ca37b9a91e137e62d9ea\"}"
+				},
+				{
+					"id": "3045732b-2253-44d6-9c9e-bf269ea4f120",
+					"name": "[Example][Invalid][PUT] Immbilize a specific hardware with empty floor level",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"level\": \"\",\n\t\"level_name\":\"administracao\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/immobilize/5a64ca37b9a91e137e62d9ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"immobilize",
+								"5a64ca37b9a91e137e62d9ea"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:50:56 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 29,
+					"body": "{\"message\":\"Invalid request\",\"requestId\":\"5a64ca37b9a91e137e62d9ea\",\"request\":null}"
+				},
+				{
+					"id": "46532e3f-4191-43b1-8610-b9884c3df158",
+					"name": "[Example][Invalid][PUT] Immbilize a specific hardware with blank floor level",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"level\": \" \",\n\t\"level_name\":\"administracao\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/immobilize/5a64c88cb9a91e137e62d9ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"immobilize",
+								"5a64c88cb9a91e137e62d9ea"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:52:07 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 29,
+					"body": "{\"message\":\"Invalid request\",\"requestId\":\"5a64c88cb9a91e137e62d9ea\",\"request\":null}"
+				},
+				{
+					"id": "dc053a79-a88d-4657-af30-031f618cfa6a",
+					"name": "[PUT] Immbilize a specific hardware with null floor level",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"level\": null,\n\t\"level_name\":\"administracao\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/immobilize/5a64c88cb9a91e137e62d9ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"immobilize",
+								"5a64c88cb9a91e137e62d9ea"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:52:59 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 40,
+					"body": "{\"message\":\"Invalid request\",\"requestId\":\"5a64c88cb9a91e137e62d9ea\",\"request\":null}"
+				}
+			]
+		},
+		{
+			"name": "[GET] List all hardwares is immobilized or not(with query string \"is_immobilized\")",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:5000/api/hardware/immobilized",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"hardware",
+						"immobilized"
+					]
+				},
+				"description": "Um método GET que lista todos os equipamentos imobilizados ou não."
+			},
+			"response": [
+				{
+					"id": "35353a98-1bbf-4ffc-8462-4954f8238418",
+					"name": "[Example][Valid][GET] List all hardwares is immobilized ",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/immobilized",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"immobilized"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:54:22 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 45,
+					"body": "[{\"id\":\"5a64c88cb9a91e137e62d9ea\",\"name\":\"Teclado sem fio\",\"brand\":\"Microsft\",\"factory_code\":\"1234567890\",\"description\":\"Teclado bluetooth\",\"is_immobilized\":true,\"immobilizer_floor\":{\"level\":16,\"level_name\":\"administracao\"}},{\"id\":\"5a64ca37b9a91e137e62d9eb\",\"name\":\"Mouse - 2\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":true,\"immobilizer_floor\":{\"level\":1,\"level_name\":\"TI\"}},{\"id\":\"5a64cb39b9a91e137e62d9ec\",\"name\":\"Mouse - 2\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":true,\"immobilizer_floor\":{\"level\":1,\"level_name\":\"TI\"}},{\"id\":\"5a64cb97b9a91e137e62d9ed\",\"name\":\"Mouse - 2\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":true,\"immobilizer_floor\":{\"level\":2,\"level_name\":\"TI\"}}]"
+				},
+				{
+					"id": "7dee289b-a896-47fa-8620-e2c1ac5f1d64",
+					"name": "[Example][Valid][GET] List all hardwares is not immobilized",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/immobilized?is_immobilized=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"immobilized"
+							],
+							"query": [
+								{
+									"key": "is_immobilized",
+									"value": "false",
+									"equals": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:56:45 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 49,
+					"body": "[{\"id\":\"5a64cc7eb9a91e137e62d9ee\",\"name\":\"1a\",\"brand\":\"LG\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":false,\"immobilizer_floor\":null},{\"id\":\"5a64d0ccb9a91e137e62d9ef\",\"name\":\"Mouse\",\"brand\":\"Microsoft\",\"factory_code\":\"1234567890\",\"description\":\"Mouse infravermelho\",\"is_immobilized\":false,\"immobilizer_floor\":null}]"
+				}
+			]
+		},
+		{
+			"name": "[GET] list hardwares is immobilized on specific floor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:5000/api/hardware/immobilized/floor/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"hardware",
+						"immobilized",
+						"floor",
+						"1"
+					]
+				},
+				"description": "Um método GET que lista todos os equipamentos que estão imobilizados em andar espeicifco"
+			},
+			"response": [
+				{
+					"id": "a2bedee1-bb32-447f-94f6-ae3d8511e9ef",
+					"name": "[Example][Valid][GET] list hardwares is immobilized on floor level = 1",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/immobilized/floor/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"immobilized",
+								"floor",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 17:58:02 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 9,
+					"body": "[{\"id\":\"5a64c88cb9a91e137e62d9ea\",\"name\":\"Teclado sem fio\",\"brand\":\"Microsft\",\"factory_code\":\"1234567890\",\"description\":\"Teclado bluetooth\",\"is_immobilized\":true,\"immobilizer_floor\":{\"level\":16,\"level_name\":\"administracao\"}}]"
+				},
+				{
+					"id": "d1eee9c5-73e9-4197-9e92-74d39ebb283f",
+					"name": "[GET] list hardwares is immobilized on floor 16",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/immobilized/floor/16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"immobilized",
+								"floor",
+								"16"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 18:00:49 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 64,
+					"body": "[{\"id\":\"5a64c88cb9a91e137e62d9ea\",\"name\":\"Teclado sem fio\",\"brand\":\"Microsft\",\"factory_code\":\"1234567890\",\"description\":\"Teclado bluetooth\",\"is_immobilized\":true,\"immobilizer_floor\":{\"level\":16,\"level_name\":\"administracao\"}}]"
+				},
+				{
+					"id": "09f3814b-1b57-4f89-9fba-fc007899b664",
+					"name": "[Example][Invalid][GET] list hardwares is immobilized on specific floor with invalid value",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/immobilized/floor/Invalid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"immobilized",
+								"floor",
+								"Invalid"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 18:01:35 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 12,
+					"body": "[]"
+				}
+			]
+		},
+		{
+			"name": "[DELETE] Delete a specific hardware",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:5000/api/hardware/5a64cb97b9a91e137e62d9ed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"hardware",
+						"5a64cb97b9a91e137e62d9ed"
+					]
+				},
+				"description": "Método DELETE que excluir um hardware especifico"
+			},
+			"response": [
+				{
+					"id": "8a0e12aa-bda7-43ed-ba05-a00ef672391a",
+					"name": "[Example][Valid][DELETE] Delete a specific hardware",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/5a64cb97b9a91e137e62d9ed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"5a64cb97b9a91e137e62d9ed"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 18:04:09 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 85,
+					"body": ""
+				},
+				{
+					"id": "21ead623-7ce8-45e3-973f-50aeb7a9d947",
+					"name": "[Example][Invalid][DELETE] Delete a specific hardware with not exists id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:5000/api/hardware/5a64cb97b9a91e137e62d9ef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"hardware",
+								"5a64cb97b9a91e137e62d9ef"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Jan 2018 18:05:38 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 32,
+					"body": "{\"message\":\"The hardware was not found\",\"requestId\":\"5a64cb97b9a91e137e62d9ef\"}"
+				}
+			]
+		}
+	]
+}
