@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Imobilizados.WebApi
 {
-    public static class MapperServiceCollectionExtension
+    public static class AutoMapperConfiguration
     {
-        public static void InitializeMappingEntitiesAndDtos(this IServiceCollection collection)
+        public static void Configure()
         {
             Mapper.Initialize(cfg => {
                 cfg.CreateMap<Hardware, HardwareDto>();

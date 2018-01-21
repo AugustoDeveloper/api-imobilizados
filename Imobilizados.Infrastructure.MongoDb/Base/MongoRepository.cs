@@ -27,7 +27,7 @@ namespace Imobilizados.Infrastructure.MongoDb.Base
         }
 
         public override async Task AddAsync(TEntity entity)
-        {
+        {            
              await Collection.InsertOneAsync(entity);
         }
 

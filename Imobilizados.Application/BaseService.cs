@@ -27,6 +27,7 @@ namespace Imobilizados.Application
         {
             var entity = TransformToEntity(dto);
             await Repository.AddAsync(entity);
+            dto = TransformToDto(entity);
         }
         
         public async Task UpdateAsync(string id, TDto dto)

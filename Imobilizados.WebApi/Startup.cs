@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Http;
 
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
+using SimpleInjector.Integration.AspNetCore.Mvc;
 
 namespace Imobilizados.WebApi
 {
@@ -34,7 +35,10 @@ namespace Imobilizados.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.InitializeMappingEntitiesAndDtos();
+            services.AddSingleton<IControllerActivator>(new SimpleInjectorControllerActivator(_container));
+            services.AddSingleton<IViewComponentActivator>(new SimpleInjectorViewComponentActivator(_container));
+            AutoMapperConfiguration.Configure();
+            MongoDbConfiguration.Map();
             services.AddMvc();
             IntegrateSimpleInjector(services);   
         }
@@ -50,11 +54,12 @@ namespace Imobilizados.WebApi
         }
 
         private void IntegrateSimpleInjector(IServiceCollection services)
-        {
+        {            
             _container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+            _container.RegisterMongoDb(Configuration);
             services.EnableSimpleInjectorCrossWiring(_container);
             services.UseSimpleInjectorAspNetRequestScoping(_container);
-            _container.RegisterMongoDbRepositoriesAndMap(Configuration);
+            _container.Verify();
         }
     }
 }

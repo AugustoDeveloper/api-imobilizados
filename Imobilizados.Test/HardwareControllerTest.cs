@@ -573,7 +573,7 @@ namespace Imobilizados.Test
 
             
             Assert.NotNull(response);
-            var expectedType = typeof(CreatedAtRouteResult);
+            var expectedType = typeof(CreatedResult);
             Assert.IsType(expectedType, response);
         }        
 
@@ -681,7 +681,7 @@ namespace Imobilizados.Test
             
 
             Assert.NotNull(response);
-            var expectedType = typeof(CreatedAtRouteResult);            
+            var expectedType = typeof(CreatedResult);            
             Assert.IsType(expectedType, response);
         }
 #endregion

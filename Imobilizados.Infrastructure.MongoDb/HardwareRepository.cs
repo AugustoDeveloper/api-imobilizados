@@ -12,18 +12,18 @@ namespace Imobilizados.Infrastructure.MongoDb
 {
     public class HardwareRepository : MongoRepository<Hardware>, IHardwareRepository
     {
-        protected HardwareRepository(IMongoClient mongoClient) : base(mongoClient){ }
+        public HardwareRepository(IMongoClient mongoClient) : base(mongoClient){ }
 
         protected override string CollectionName => "Hardwares";
 
         public async Task<List<Hardware>> LoadByFloorAsync(Floor floor)
         {
-            return await Collection.Find( h => h.IsImmobilized).ToListAsync();
+            return await Collection.Find( h => h.IsImmobilized && h.ImmobilizerFloor.Level == floor.Level).ToListAsync();
         }
 
         public async Task<List<Hardware>> LoadByIsImmobilizedAsync(bool isImmobilized)
         {
-            return await Collection.Find( h => h.IsImmobilized).ToListAsync();
+            return await Collection.Find( h => h.IsImmobilized == isImmobilized).ToListAsync();
         }
 
     }

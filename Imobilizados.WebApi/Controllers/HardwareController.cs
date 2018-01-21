@@ -19,15 +19,14 @@ namespace Imobilizados.WebApi.Controllers
         {
             _service = service;
         }
-
-        // GET api/values
-        [HttpGet("/all")]
+        
+        [HttpGet("all")]
         public async Task<List<HardwareDto>> LoadAll()
         { 
             return await _service.LoadAllAsync();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:length(24)}", Name = "GetById")]
         public async Task<IActionResult> GetById([Required] string id)
         {
             if (string.IsNullOrEmpty(id) || string.IsNullOrWhiteSpace(id)) 
@@ -53,11 +52,11 @@ namespace Imobilizados.WebApi.Controllers
 
             await _service.AddAsync(dto);
 
-            return CreatedAtRoute("", new {id = dto.Id}, dto);
+            return Created("/", dto);
         }
 
         
-        [HttpPut("{id}")]
+        [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update([Required]string id, [FromBody]HardwareDto dto)
         {
             if (string.IsNullOrEmpty(id) || 
@@ -79,7 +78,7 @@ namespace Imobilizados.WebApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (string.IsNullOrEmpty(id) || 
@@ -98,20 +97,20 @@ namespace Imobilizados.WebApi.Controllers
             return NoContent();
         }
 
-        [HttpGet("/all")]
-        public async Task<List<HardwareDto>> LoadByIsImmobilized([FromQuery(Name = "is_immobilized")] bool isImmobilized)
+        [HttpGet("immobilized")]
+        public async Task<List<HardwareDto>> LoadByIsImmobilized([FromQuery(Name = "is_immobilized")]bool isImmobilized = true)
         {
             return await _service.LoadByIsImmobilizedAsync(isImmobilized);
         }
 
-        [HttpGet("/all")]
-        public async Task<List<HardwareDto>> LoadByFloor([FromQuery(Name = "floor")] int floorLevel)
+        [HttpGet("immobilized/floor/{floorLevel}")]
+        public async Task<List<HardwareDto>> LoadByFloor(int floorLevel)
         {
             return await _service.LoadByFloorAsync(new FloorDto { Level = floorLevel });
         }
 
-        [HttpPut("{id}/immobilize")]
-        public async Task<IActionResult> Immobilize(string id, FloorDto floor)
+        [HttpPut("immobilize/{id:length(24)}")]
+        public async Task<IActionResult> Immobilize([Required]string id, [FromBody]FloorDto floor)
         {
             if (string.IsNullOrEmpty(id) || 
                 string.IsNullOrWhiteSpace(id) ||
@@ -119,18 +118,18 @@ namespace Imobilizados.WebApi.Controllers
                 (floor?.Level <  0)
                 ) 
             {
-                return BadRequest();
+                return BadRequest(new { message = "Invalid request" });
             }
 
             var existsDto = await _service.GetByIdAsync(id);
             if (existsDto == null) 
             {
-                return NotFound();
+                return NotFound(new { message = "Hardware not found" });
             }
 
             if (existsDto.IsImmobilized)
             {
-                return BadRequest();
+                return BadRequest(new { message = "Hardware is already immobilized" });
             }
 
             existsDto.ImmobilizerFloor = floor;
