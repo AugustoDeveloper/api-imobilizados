@@ -59,6 +59,7 @@ namespace Imobilizados.API
             {
                 app.UseHsts();
                 Console.WriteLine($"Is Production: {env.IsProduction()}");
+                app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();

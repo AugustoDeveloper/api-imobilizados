@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  imobilizados-api:
+    image: imobilizados-api
+    build:
+      context: .
+    ports:
+      - "5000:80"
+    networks:
+      - imobilizados-network
+    depends_on:
+      - "mongo-imobilizados"
+
+  mongo-imobilizados:
+    image: mongo
+    ports:
+    - "27017:27017"
+    networks:
+    - imobilizados-network
+  
+networks:
+  imobilizados-network:
+    driver: bridge
