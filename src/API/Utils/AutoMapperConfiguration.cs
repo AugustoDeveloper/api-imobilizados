@@ -3,7 +3,7 @@ using Imobilizados.Application.Dtos;
 using Imobilizados.Domain.Entity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Imobilizados.WebApi
+namespace Imobilizados.API.Utils
 {
     public static class AutoMapperConfiguration
     {

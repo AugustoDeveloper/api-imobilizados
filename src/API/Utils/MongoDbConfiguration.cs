@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Configuration;
-using SimpleInjector;
 using MongoDB.Driver;
 using Imobilizados.Infrastructure.MongoDb;
 using Imobilizados.Domain.Repository;
@@ -12,17 +11,10 @@ using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Serializers;
 
-namespace Imobilizados.WebApi
+namespace Imobilizados.API.Utils
 {
     public static class MongoDbConfiguration
     {
-        public static void RegisterMongoDb(this Container container, IConfiguration configuration, string connectionStringName = "DefaultConnection")
-        {
-            container.RegisterSingleton<IMongoClient>(new MongoClient(configuration.GetConnectionString(connectionStringName)));
-            container.Register<IHardwareRepository, HardwareRepository>(Lifestyle.Transient);
-            container.Register<IHardwareService, HardwareService>(Lifestyle.Transient);      
-        }
-
         public static void Map()
         {
             if (!BsonClassMap.IsClassMapRegistered(typeof(Hardware)))

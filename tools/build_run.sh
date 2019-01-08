@@ -1,0 +1,1 @@
+dotnet build ./imobilizados.sln && dotnet run --project ./src/API/Imobilizados.API.csproj

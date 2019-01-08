@@ -6,7 +6,7 @@ using Moq;
 using Xunit;
 using System.Collections.Generic;
 using Imobilizados.Application.Dtos;
-using Imobilizados.WebApi.Controllers;
+using Imobilizados.API.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 
