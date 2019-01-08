@@ -14,9 +14,9 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Imobilizados.Application\Imobilizados.Application.csproj"/>
-    <ProjectReference Include="..\Imobilizados.Domain.Entity\Imobilizados.Domain.Entity.csproj"/>
-    <ProjectReference Include="..\Imobilizados.Domain.Repository\Imobilizados.Domain.Repository.csproj"/>
-    <ProjectReference Include="..\Imobilizados.WebApi\Imobilizados.WebApi.csproj"/>
+    <ProjectReference Include="..\..\src\Imobilizados.Application\Imobilizados.Application.csproj"/>
+    <ProjectReference Include="..\..\src\Imobilizados.Domain.Entity\Imobilizados.Domain.Entity.csproj"/>
+    <ProjectReference Include="..\..\src\Imobilizados.Domain.Repository\Imobilizados.Domain.Repository.csproj"/>
+    <ProjectReference Include="..\..\src\Imobilizados.WebApi\Imobilizados.WebApi.csproj"/>
   </ItemGroup>
 </Project>

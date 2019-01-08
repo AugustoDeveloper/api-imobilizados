@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Test", "Imobilizados.Test\Imobilizados.Test.csproj", "{EC2D6720-B1A1-4361-8975-5E3F8D59B98F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Test", "tests\Imobilizados.Test\Imobilizados.Test.csproj", "{EC2D6720-B1A1-4361-8975-5E3F8D59B98F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.WebApi", "Imobilizados.WebApi\Imobilizados.WebApi.csproj", "{93A575D1-D227-4B81-BB4C-53A884CF5706}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.WebApi", "src\Imobilizados.WebApi\Imobilizados.WebApi.csproj", "{93A575D1-D227-4B81-BB4C-53A884CF5706}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Repository.MongoDb", "Imobilizados.Infrastructure.MongoDb\Imobilizados.Infrastructure.MongoDb.csproj", "{745BFC46-8A87-4AC5-9556-5439DB96A309}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Repository.MongoDb", "src\Imobilizados.Infrastructure.MongoDb\Imobilizados.Infrastructure.MongoDb.csproj", "{745BFC46-8A87-4AC5-9556-5439DB96A309}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Domain.Repository", "Imobilizados.Domain.Repository\Imobilizados.Domain.Repository.csproj", "{1C49D19F-23F1-472B-8D64-14D5DAF8854A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Domain.Repository", "src\Imobilizados.Domain.Repository\Imobilizados.Domain.Repository.csproj", "{1C49D19F-23F1-472B-8D64-14D5DAF8854A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Domain.Entity", "Imobilizados.Domain.Entity\Imobilizados.Domain.Entity.csproj", "{76D1AD69-6585-4912-B571-6646C86DB423}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Domain.Entity", "src\Imobilizados.Domain.Entity\Imobilizados.Domain.Entity.csproj", "{76D1AD69-6585-4912-B571-6646C86DB423}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Application", "Imobilizados.Application\Imobilizados.Application.csproj", "{01297827-89D2-4058-BE66-6D2F053BD350}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobilizados.Application", "src\Imobilizados.Application\Imobilizados.Application.csproj", "{01297827-89D2-4058-BE66-6D2F053BD350}"
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
