@@ -19,6 +19,14 @@ services:
     networks:
     - imobilizados-network
   
+  rabbitmq-imobilizados:
+    image: rabbitmq:3-management
+    ports:
+    - "15672:15672"
+    - "5672:5672"
+    networks:
+    - imobilizados-network
+  
 networks:
   imobilizados-network:
     driver: bridge
