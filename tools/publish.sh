@@ -1,1 +1,1 @@
-dotnet publish
+dotnet restore && dotnet publish

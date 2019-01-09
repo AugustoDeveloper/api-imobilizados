@@ -7,7 +7,7 @@ using Imobilizados.Application;
 using Imobilizados.Application.Interfaces;
 using Imobilizados.Domain.Repository;
 using Imobilizados.Infrastructure;
-using Imobilizados.Infrastructure.MongoDb;
+using Imobilizados.Infrastructure.MemoryDb;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
