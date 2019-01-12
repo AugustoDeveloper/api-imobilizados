@@ -9,7 +9,7 @@
        "type": "coreclr",
        "request": "launch",
        "preLaunchTask": "build",
-       "program": "${workspaceRoot}/bin/Debug/netcoreapp2.0/Imobilizados.WebApi.dll",
+       "program": "${workspaceRoot}/src/API/bin/Debug/netcoreapp2.1/Imobilizados.API.dll",
        "args": [],
        "cwd": "${workspaceRoot}",
        "stopAtEntry": false,
@@ -28,26 +28,12 @@
            }
        },
        "env": {
-           "ASPNETCORE_ENVIRONMENT": "Staging"
+           "ASPNETCORE_ENVIRONMENT": "Development"
        },
        "sourceFileMap": {
            "/Views": "${workspaceRoot}/Views"
        }
    },
-        {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Imobilizados.Test/bin/Debug/netcoreapp2.0/Imobilizados.Test.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/Imobilizados.Test",
-            // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
-            "console": "internalConsole",
-            "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart"
-        },
         {
             "name": ".NET Core Attach",
             "type": "coreclr",

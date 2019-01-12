@@ -9,29 +9,24 @@ namespace Imobilizados.Infrastructure.MemoryDb.Base
 {
     public class MemoryRepository<TEntity> : BaseRepository<TEntity> where TEntity : class, IEntity
     {
-        private static readonly Lazy<Dictionary<string, TEntity>> lazyDatabase = new Lazy<Dictionary<string, TEntity>>(() => new Dictionary<string, TEntity>());
-        protected static Dictionary<string, TEntity> Database => lazyDatabase.Value;
+        private readonly object lockObject = new object();
+        private static readonly Lazy<Dictionary<int, TEntity>> lazyDatabase = new Lazy<Dictionary<int, TEntity>>(() => new Dictionary<int, TEntity>());
+        protected static Dictionary<int, TEntity> Database => lazyDatabase.Value;
         public MemoryRepository()
         {
         }
 
         public override void Add(TEntity entity)
         {
-            string id = GenerateNewId();
-            entity.Id = id;
-            Database.Add(id, entity);
-        }
-
-        private string GenerateNewId()
-        {
-            var id = Guid.NewGuid();
-            while (Database.ContainsKey(id.ToString()))
+            lock(lockObject)
             {
-                id = Guid.NewGuid();
+                int id = GenerateNewId();
+                entity.Id = id.ToString().PadLeft(24, '0');
+                Database.Add(id, entity);
             }
-
-            return Convert.ToBase64String(id.ToByteArray());
         }
+
+        private int GenerateNewId() => (Database.Keys.Any() ?  Database.Keys.Max() + 1 : 1);
 
         public override Task AddAsync(TEntity entity)
         {
@@ -40,7 +35,10 @@ namespace Imobilizados.Infrastructure.MemoryDb.Base
 
         public override void Delete(string id)
         {
-            Database.Remove(id);
+            if (int.TryParse(id, out int key))
+            {
+                Database.Remove(key);
+            }
         }
 
         public override Task DeleteAsync(string id)
@@ -50,7 +48,9 @@ namespace Imobilizados.Infrastructure.MemoryDb.Base
 
         public override TEntity GetById(string id)
         {
-            return Database.ContainsKey(id) ? Database[id] : default(TEntity);
+            return int.TryParse(id, out int key) && Database.ContainsKey(key) ? 
+                Database[key] : 
+                default(TEntity);
         }
 
         public override Task<TEntity> GetByIdAsync(string id)
@@ -70,9 +70,9 @@ namespace Imobilizados.Infrastructure.MemoryDb.Base
 
         public override void Update(string id, TEntity entity)
         {
-            if (Database.ContainsKey(id))
+            if (int.TryParse(id, out int key) && Database.ContainsKey(key))
             {
-                Database[id] = entity;
+                Database[key] = entity;
             }
         }
 
