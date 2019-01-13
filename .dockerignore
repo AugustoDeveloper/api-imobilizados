@@ -1,0 +1,14 @@
+# Docker files
+.dockerignore
+Dockerfile
+docker-compose.yaml
+
+# Git files
+.git/
+.gitignore
+
+# Other files
+.vscode/
+tests/
+docs/
+logstash/
