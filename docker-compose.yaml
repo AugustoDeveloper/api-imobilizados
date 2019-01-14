@@ -4,6 +4,7 @@ services:
   api:
     container_name: imobilizados-api
     image: imobilizados-api
+    restart: on-failure
     build:
       context: .
     ports:
@@ -22,6 +23,7 @@ services:
     image: rabbitmq:3.6-management-alpine
     container_name: imobilizados-rabbitmq
     hostname: imobilizados-rabbitmq
+    restart: on-failure
     environment:
       RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
       RABBITMQ_DEFAULT_USER: "ImobilizadoUser"
