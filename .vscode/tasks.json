@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Imobilizados.Test/Imobilizados.Test.csproj"
+                "${workspaceFolder}/src/API/Imobilizados.API.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

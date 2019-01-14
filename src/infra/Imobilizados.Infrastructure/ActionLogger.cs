@@ -27,7 +27,7 @@ namespace Imobilizados.Infrastructure
                 Timestamp = DateTime.Now
             };
 
-            logger.LogInformation(1, data.ToString());
+            logger.LogInformation(2000, data.ToString());
             logger.LogTrace("Passei por aqui");
         }
 

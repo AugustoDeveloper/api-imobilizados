@@ -7,7 +7,7 @@ using Imobilizados.Application;
 using Imobilizados.Application.Interfaces;
 using Imobilizados.Domain.Repository;
 using Imobilizados.Infrastructure;
-using Imobilizados.Infrastructure.MongoDb;
+using Imobilizados.Infrastructure.MemoryDb;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -17,6 +17,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Imobilizados.Infrastructure.Logging;
+using Imobilizados.Infrastructure.RabbitMQ;
 
 namespace Imobilizados.API
 {
@@ -48,6 +50,8 @@ namespace Imobilizados.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddRabbitMQ(Configuration, eventId: 2000);
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -59,6 +63,7 @@ namespace Imobilizados.API
                 app.UseDeveloperExceptionPage();
             }
 
+            
             app.UseHttpsRedirection();
             app.UseMvc();
         }

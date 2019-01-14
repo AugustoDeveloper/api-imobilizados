@@ -2,36 +2,96 @@ version: '3'
 
 services:
   imobilizados-api:
+    container_name: imobilizados-api
     image: imobilizados-api
     build:
       context: .
     ports:
-      - "5000:80"
+      - 5000:80
     networks:
       - imobilizados-network
     depends_on:
-      - "mongo-imobilizados"
+      - imobilizados-mongo
+      - imobilizados-rabbitmq
 
-  mongo-imobilizados:
+  imobilizados-mongo:
     image: mongo
+    container_name: imobilizados-mongo
     ports:
-    - "27017:27017"
+    - 27017:27017
     networks:
     - imobilizados-network
   
-  rabbitmq-imobilizados:
-    image: rabbitmq:3-management
+  imobilizados-rabbitmq:
+    image: rabbitmq:3.6-management-alpine
+    container_name: imobilizados-rabbitmq
+    hostname: imobilizados-rabbitmq
     environment:
       RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
-      RABBITMQ_DEFAULT_USER: "admin"
-      RABBITMQ_DEFAULT_PASS: "admin"
+      RABBITMQ_DEFAULT_USER: "ImobilizadoUser"
+      RABBITMQ_DEFAULT_PASS: "123"
       RABBITMQ_DEFAULT_VHOST: "/"
     ports:
-    - "15672:15672"
-    - "5672:5672"
+    - 15672:15672
+    - 5672:5672
     networks:
     - imobilizados-network
-  
+
+  imobilizados-logstash:
+    image: docker.elastic.co/logstash/logstash:6.5.4
+    container_name: imobilizados-logstash
+    restart: on-failure
+    command: bin/logstash -f /logstash_dir/logstash.conf
+    volumes:
+      - ./logstash/:/logstash_dir/
+    ports:
+      - 5959:5959
+    depends_on:
+      - imobilizados-elasticsearch
+      - imobilizados-rabbitmq
+    networks:
+      - imobilizados-network
+    labels:
+      com.example.service: "imobilizados-logstash"
+      com.example.description: "For logging data"
+
+  imobilizados-elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    container_name: imobilizados-elasticsearch
+    restart: on-failure
+    hostname: imobilizados-elasticsearch
+    environment:
+      - cluster.name=imobilizados-cluster
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - esdata:/usr/share/imobilizados-elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - imobilizados-network
+    labels:
+      com.example.service: "imobilizados-elasticsearch"
+      com.example.description: "For searching and indexing data"
+
+  imobilizados-kibana:
+    image: docker.elastic.co/kibana/kibana:6.5.4
+    container_name: imobilizados-kibana
+    restart: on-failure
+    hostname: kibana
+    environment:
+      - ELASTICSEARCH_URL=http://imobilizados-elasticsearch:9200
+    ports:
+      - 5601:5601
+    depends_on:
+      - imobilizados-elasticsearch
+    networks:
+      - imobilizados-network
+    labels:
+      com.example.service: "kibana"
+      com.example.description: "Data visualization and for log aggregation"
 networks:
   imobilizados-network:
     driver: bridge
+volumes:
+  esdata:

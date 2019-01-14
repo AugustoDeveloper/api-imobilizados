@@ -9,6 +9,7 @@
     <ProjectReference Include="..\core\Imobilizados.Domain.Repository\Imobilizados.Domain.Repository.csproj"/>
     <ProjectReference Include="..\core\Imobilizados.Domain.Entity\Imobilizados.Domain.Entity.csproj"/>
     <ProjectReference Include="..\infra\Imobilizados.Infrastructure.MongoDb\Imobilizados.Infrastructure.MongoDb.csproj"/>
+    <ProjectReference Include="..\infra\Imobilizados.Infrastructure.MemoryDb\Imobilizados.Infrastructure.MemoryDb.csproj"/>
     <ProjectReference Include="..\core\Imobilizados.Application\Imobilizados.Application.csproj"/>
     <ProjectReference Include="..\infra\Imobilizados.Infrastructure\Imobilizados.Infrastructure.csproj"/>
   </ItemGroup>
