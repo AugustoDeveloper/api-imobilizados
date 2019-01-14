@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RabbitMQ.Client;
 
-namespace Imobilizados.Infrastructure.RabbitMQ.Publish
+namespace Imobilizados.Infrastructure.RabbitMQ.Publisher
 {
     public class RabbitMQPublisher
     {

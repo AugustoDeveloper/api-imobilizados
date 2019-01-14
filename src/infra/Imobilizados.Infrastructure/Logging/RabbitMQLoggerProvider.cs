@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 using Imobilizados.Infrastructure.RabbitMQ;
-using Imobilizados.Infrastructure.RabbitMQ.Publish;
+using Imobilizados.Infrastructure.RabbitMQ.Publisher;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
