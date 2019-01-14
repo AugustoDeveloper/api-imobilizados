@@ -39,8 +39,7 @@ namespace Imobilizados.Infrastructure.RabbitMQ.Publisher
                 queue: configuration.QueueName,
                 durable: true,
                 exclusive: false,
-                autoDelete: false,
-                arguments: new Dictionary<string, object> { {"x-message-ttl", 3600000 } }
+                autoDelete: false
             );
 
             channel.QueueBind(
