@@ -81,5 +81,18 @@ services:
       com.example.service: "imobilizados-kibana"
       com.example.description: "Data visualization and for log aggregation"
 
+  imobilizados-postgres:
+    image: postgres:11.1-alpine
+    container_name: imobilizados-postgres
+    restart: on-failure
+    environment:
+      -  POSTGRES_USER=imobilizado
+      - POSTGRES_PASSWORD=1m0b1l1zad0
+    ports:
+      - 5432:5432
+
+networks:
+  imobilizados-network:
+    driver: bridge
 volumes:
   esdata:
