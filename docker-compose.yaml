@@ -10,7 +10,7 @@ services:
     ports:
       - 5000:80
     depends_on:
-      - mongo
+      - postgres
       - rabbitmq
 
   mongo:
