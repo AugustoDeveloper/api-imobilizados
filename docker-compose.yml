@@ -87,7 +87,7 @@ services:
     restart: on-failure
     hostname: imobilizados-postgres
     environment:
-      - POSTGRES_USER=imobilizado
+      - POSTGRES_USER=imobilizados-api
       - POSTGRES_PASSWORD=1m0b1l1zad0
     volumes:
       - ./db/:/docker-entrypoint-initdb.d/
