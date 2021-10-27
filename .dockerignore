@@ -11,6 +11,4 @@ docker-compose.yaml
 .vscode/
 tests/
 docs/
-logstash/
 tools/
-db/
